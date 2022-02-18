@@ -1,0 +1,13 @@
+name: dsci310
+channels:
+  - conda-forge
+  - districtdatalabs
+  - defaults
+dependencies:
+  - python=3.7
+  - pandas-profiling
+  - matplotlib
+  - pandas
+  - jupyterlab
+  - scikit-learn
+prefix: C:\Users\amahd\miniconda3\envs\dsci310
