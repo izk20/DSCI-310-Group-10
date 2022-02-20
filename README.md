@@ -3,10 +3,10 @@
 ## DSCI 310 Group 10 Project
 
 ### Authors: 
-1.Nikko Dumrique  (nkoda)
-2.Mahdi Heydar (mahdiheydar)
-3.Ahmed Rizk  (izk20)
-4.Harry Zhang  (harrysyz99)
+1.Nikko Dumrique  (nkoda)  
+2.Mahdi Heydar (mahdiheydar)  
+3.Ahmed Rizk  (izk20)  
+4.Harry Zhang  (harrysyz99)  
 
 ### Summary:
   The KNN-Classification model was applied to 2017 Canadian census data to predict whether an individual made money on their investments (true class) or broke even or lost money (false class) using their family size and whether they are the major income earner in their family as features.
