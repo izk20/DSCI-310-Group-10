@@ -31,7 +31,7 @@ Steps:
 * Clone this repository to your local machine
 * Using the command line/terminal, navigate to the repository directory
 * Type the following:
-    - **```docker run -it --rm -p 8888:8888 -v /$(pwd):/home/investment-outcome-knn dsci-310-10-project```**
+    - **```docker run -it --rm -p 8888:8888 -v /$(pwd):/home/investment-outcome-knn mahdiheydar/dsci-310-10-project```**
 * This will enter the container, type the following once inside the container
     - **```jupyter lab --ip 0.0.0.0 --port 8888 --no-browser --allow-root```**
 * Using the links provided, open Jupyter Lab and navigate to the home folder using the directory on the left
