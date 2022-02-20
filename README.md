@@ -15,7 +15,7 @@
   
   The KNN-model was tuned for the nearest neighbors hyperparameter. A value of 26 was used yielding approximately 57% accuracy. Therefore, the model did not perform much better compared to a dummy classifier. The KNN-classification model was not able to distinguish between individuals in the same family size group unlike the pattern found in the actual data.
   
-  It is important to build other models such as a support vector machine model (SVM) or carry out feature engineering or add other features that may serve as better predictors to gain more solid results regarding the original research question of how family size and whether an individual is the major income earner in their family can be used ot predict investment outcomes.
+  It is important to build other models such as a support vector machine model (SVM), or carry out feature engineering or add other features that may serve as better predictors to gain more solid results. This will enhance the investigation of the original research question of how family size, and whether an individual is the major income earner in their family, can be used ot predict investment outcomes.
   
 ### Dataset Description
 
