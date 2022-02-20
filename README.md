@@ -20,3 +20,15 @@
 ### Dataset Description
 
   Canadian Income Survey (CIS) is a cross-sectional survey sponsored both by the Government of Canada and Statistics Canada. The purpose of this survey is to collect information from all citizens and households within Canada, however, around 2% of the residing on the reserve, aboriginal settlements or extremely remote areas with extremely small populations is not included in this survey. This survey collects the data from several different characteristics including labour market activity, school attendance, disability, support payments, child care expenses, inter-household transfers. This dataset also combines some information from the Labour Force Survey(LFS), such as the information about the education level ogeography information. This data set is available to all of the organizations, different levels of the government, and individuals. Different governments could use this dataset to make economic policies to all canadians.
+
+### Usage
+
+Docker info
+
+### Dependencies
+
+* Python 3.9.7 with packages:
+  - pandas=1.3.4 
+  - scikit-learn=0.24.2 
+  - seaborn=0.11.2 
+  - matplotlib=3.4.3 
