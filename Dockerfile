@@ -1,4 +1,3 @@
-# Group 10 Docker File 
 FROM continuumio/anaconda3
 
 RUN conda install --y \
