@@ -60,7 +60,7 @@ People who do not followed the community stand might have following punishment (
 
 ## procedure for reporting and dealing with unacceptable behaviour  
 
-The standardize way to report the unacceptable behaviour is send a private email to one of the community leaders (Detail provided in the ReadMe.md File). Then community leader will have a inner meeting with eachother to consider which punishment could be applied. 
+The standardize way to report the unacceptable behaviour is send a private email to one of the community leaders (Detail provided in the READMe.md File). Then community leader will have a inner meeting with eachother to consider which punishment could be applied. 
 
 ## Attribution
 
