@@ -9,7 +9,7 @@
 4.Harry Zhang  
 
 ### Summary:
-  The KNN-Classification model was applied to 2018 Canadian census data to predict whether an individual made money on their investments (true class) or broke even or lost money (false class) using their family size and whether they are the major income earner in their family as features.
+  The KNN-Classification model was applied to 2017 Canadian census data to predict whether an individual made money on their investments (true class) or broke even or lost money (false class) using their family size and whether they are the major income earner in their family as features.
   
   All investments contain a risk, so the rationale for this analysis was to gain insight into whether the pressures of being the main income earner in a family and having a larger family size have influence on predicting someones investment outcomes. This could be used to further analyze the risks associated within the specific investments for further analysis.
   
