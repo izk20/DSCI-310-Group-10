@@ -33,9 +33,9 @@ jobs:
         draft: false
         prerelease: false
     - name: Publish to Registry
-      uses: harry957/Publish-Docker-Github-Action@master
+      uses: elgohr/Publish-Docker-Github-Action@master
       with:
-        name: ttimbers/dockerfile-practice # change this to your DockerHub username and repository
+        name: mahdiheydar/dsci-310-10-project # change this to your DockerHub username and repository
         username: ${{ secrets.DOCKER_USERNAME }} # you need to add your Docker username to this GitHub repo as a secret
         password: ${{ secrets.DOCKER_PASSWORD }} # you need to add your Docker password to this GitHub repo as a secret
         tags: "latest,${{ steps.bump.outputs.new_tag }}"
