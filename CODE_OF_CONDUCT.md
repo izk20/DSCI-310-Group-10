@@ -58,7 +58,9 @@ People who do not followed the community stand might have following punishment (
 3. Temporary ban from the community  
 4. Permanent ban from the community (No Way Back)
 
+## procedure for reporting and dealing with unacceptable behaviour  
 
+The standardize way to report the unacceptable behaviour is send a private email to one of the community leaders (Detail provided in the ReadMe.md File). Then community leader will have a inner meeting with eachother to consider which punishment could be applied. 
 
 ## Attribution
 
