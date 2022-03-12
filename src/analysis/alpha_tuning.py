@@ -17,7 +17,8 @@ def ridge_alpha_tuning(alpha, processor, trainx, trainy, cv=10):
                     A dataframe that contains the training set for Ridge
         trainy: pandas Series
                     A Series of classifications for a given observation
-
+        cv: an integer
+                integer represent the number of cross validation
         Raises
         ------
         TypeError:
