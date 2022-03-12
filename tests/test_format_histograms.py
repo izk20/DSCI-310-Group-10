@@ -9,6 +9,12 @@ def toy_dataset():
                     'x3':[20,40,21,34,56,53]
                     })
 
+def test_raise_errors(toy_dataset):
+    '''checks if the ValueError is thrown for empty parameter'''
+    with pytest.raises(ValueError) as e_info:
+        histograms = format_histograms(toy_dataset)
+    assert "Parameter 'texts' is empty" in str(e_info.value)
+
 def test_format_title(toy_dataset):
     '''Checks if the passed in title formats correctly'''
     assert toy_dataset is not None
@@ -38,7 +44,8 @@ def test_format_ylabel(toy_dataset):
 
 def test_format_ylabel_default(toy_dataset):
     '''checks if the ylabel will default given no formatted value'''
-    histograms = format_histograms(toy_dataset)
+    texts = { 'titles':['title1', 'title2', 'title3']}
+    histograms = format_histograms(toy_dataset, texts)
     assert histograms[0].get_ylabel() == 'Frequency'
     assert histograms[1].get_ylabel() == 'Frequency'
     assert histograms[2].get_ylabel() == 'Frequency'
