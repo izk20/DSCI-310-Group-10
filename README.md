@@ -27,8 +27,10 @@ This project can be replicated using Docker.
 
 Steps:
 
-* Install Docker if you have not already done so. This is hardware specific and is specified here:https://docs.docker.com/get-docker/
-* Clone this repository to your local machine
+* Install Docker if you have not already done so. This is hardware specific and is specified here: https://docs.docker.com/get-docker/
+* Clone this repository to your local machine:
+
+    -**```git clone git@github.com:DSCI-310/DSCI-310-Group-10.git```**
 * Using the command line/terminal, navigate to the repository directory
 * Type the following:
     - **```docker run -it --rm -p 8888:8888 -v /$(pwd):/home/investment-outcome-knn mahdiheydar/dsci-310-10-project```**
