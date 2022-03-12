@@ -8,7 +8,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import RidgeCV
 
 
-def test_ridgealphatuning_1():
+def test_ridgealphatuning_fullfunc():
     alpha = [1, 5, 12]
     toy_dataset = DataFrame({
         'x1': [1, 2, 3, 4, 6, 7, 8, 9, 0],
@@ -25,7 +25,7 @@ def test_ridgealphatuning_1():
     assert ridge_alpha_tuning(alpha, StandardScaler(), trainx, trainy, cv=2) == best_a
 
 
-def test_ridgealphatuning_2():
+def test_ridgealphatuning_alpha():
     alpha = 1
     toy_dataset = DataFrame({
         'x1': [1, 2, 3, 4, 6, 7, 8, 9, 0],
@@ -40,7 +40,7 @@ def test_ridgealphatuning_2():
         ridge_alpha_tuning(alpha, StandardScaler(), trainx, trainy, cv=2)
     assert "alpha is not a list" in str(e_info.value)
 
-def test_ridgealphatuning_3():
+def test_ridgealphatuning_trainx():
     alpha = [1, 10, 100]
     toy_dataset = DataFrame({
         'x1': [1, 2, 3, 4, 6, 7, 8, 9, 0],
@@ -56,7 +56,7 @@ def test_ridgealphatuning_3():
         ridge_alpha_tuning(alpha, StandardScaler(), trainx, trainy, cv=2)
     assert "train_x should be data frame" in str(e_info.value)
 
-def test_ridgealphatuning_4():
+def test_ridgealphatuning_trainy():
     alpha = [1, 10, 100]
     toy_dataset = DataFrame({
         'x1': [1, 2, 3, 4, 6, 7, 8, 9, 0],
@@ -70,7 +70,7 @@ def test_ridgealphatuning_4():
         ridge_alpha_tuning(alpha, StandardScaler(), trainx, trainy, cv=2)
     assert "train_y should be data frame" in str(e_info.value)
 
-def test_ridgealphatuning_5():
+def test_ridgealphatuning_cv():
     alpha = [1, 10, 100]
     toy_dataset = DataFrame({
         'x1': [1, 2, 3, 4, 6, 7, 8, 9, 0],
