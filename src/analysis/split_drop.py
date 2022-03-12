@@ -1,6 +1,9 @@
-def split_drop(data, test_size, rn, col): 
+import pandas as pd
+from sklearn.model_selection import train_test_split
 
-'''
+def split_drop(data, test_size, rn, col):
+    
+    '''
     Splits the given dataset into a training set and a testing set, 
     further splitting each set into one without a specified column,
     and one with only said specified column.
@@ -35,8 +38,11 @@ def split_drop(data, test_size, rn, col):
         raise TypeError("random number should be an integer")
     if not isinstance(col, str):
         raise TypeError("column name should be quoted (a string)")
-    if (not isinstance(test_size, float)) and (0 <= test_size <= 1):
+    if (not isinstance(test_size, float)):
+        raise TypeError("the size of the testing set should be a float")
+    if not (0.0 <= test_size and test_size <= 1.0): 
         raise ValueError("the size of the testing set should be a proportion")
+        
     if not col in list(data.columns):
         raise ValueError("the specified column is not in the provided dataframe")
     if len(data) < 10:
