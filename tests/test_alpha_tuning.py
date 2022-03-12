@@ -1,39 +1,46 @@
 from pandas import DataFrame
 from sklearn.model_selection import train_test_split
-
+import pytest
 from src.analysis.alpha_tuning import ridge_alpha_tuning
-from sklearn.pipeline import Pipeline,make_pipeline
+from sklearn.pipeline import Pipeline, make_pipeline
 from sklearn.preprocessing import StandardScaler
 
 from sklearn.linear_model import RidgeCV
 
+
 def test_ridgealphatuning_1():
-    #Make preprocessor
-    #1. Manually test
-        #make pipeline
-        #fit model
-        #Determine alpha
-    #2Run ridge model
-        #pass the same items into ridge_alpha tuning
-    #3. checking if they are equal
-        #assert if 4 equals (1,2,3)
-
-    alpha = [1,10,100]
+    alpha = [1, 5, 12]
     toy_dataset = DataFrame({
-        'x1': [1, 2, 3, 4,6,7,8,9,0],
-        'x2': [1, 2, 3, 4, 5, 6 , 7,8,10],
-        'y': [2, 3, 4, 5,6 ,7 ,7, 8, 9]
+        'x1': [1, 2, 3, 4, 6, 7, 8, 9, 0],
+        'x2': [1, 2, 3, 4, 5, 6, 7, 8, 10],
+        'y': [2, 3, 4, 5, 6, 7, 7, 8, 9]
     })
-    train, test = train_test_split(toy_dataset,test_size=.4,random_state=123)
-    trainx, trainy = train.drop(columns = 'y'),train['y']
+    train, test = train_test_split(toy_dataset, test_size=.4, random_state=123)
+    trainx, trainy = train.drop(columns='y'), train['y']
     # pip = Pipeline(steps= [('passthrough')])
-    cv_pipe =  make_pipeline(StandardScaler(), RidgeCV(alphas=alpha, cv=2))
-    cv_pipe.fit(trainx,trainy)
+    cv_pipe = make_pipeline(StandardScaler(), RidgeCV(alphas=alpha, cv=2))
+    cv_pipe.fit(trainx, trainy)
     best_a = cv_pipe.named_steps['ridgecv'].alpha_
+    print(best_a)
+    assert ridge_alpha_tuning(alpha, StandardScaler(), trainx, trainy, cv=2) == best_a
 
-    assert ridge_alpha_tuning(alpha,StandardScaler(),trainx,trainy,cv=2) == best_a
 
 def test_ridgealphatuning_2():
+    alpha = 1
+    toy_dataset = DataFrame({
+        'x1': [1, 2, 3, 4, 6, 7, 8, 9, 0],
+        'x2': [1, 2, 3, 4, 5, 6, 7, 8, 10],
+        'y': [2, 3, 4, 5, 6, 7, 7, 8, 9]
+    })
+    train, test = train_test_split(toy_dataset, test_size=.4, random_state=123)
+    trainx, trainy = train.drop(columns='y'), train['y']
+    # res = ridge_alpha_tuning(alpha, StandardScaler(), trainx, trainy, cv=2)
+    # assert res == "alpha is not a list"
+    with pytest.raises(TypeError) as e_info:
+        ridge_alpha_tuning(alpha, StandardScaler(), trainx, trainy, cv=2)
+    assert "alpha is not a list" in str(e_info.value)
+
+def test_ridgealphatuning_3():
     alpha = [1, 10, 100]
     toy_dataset = DataFrame({
         'x1': [1, 2, 3, 4, 6, 7, 8, 9, 0],
@@ -42,5 +49,38 @@ def test_ridgealphatuning_2():
     })
     train, test = train_test_split(toy_dataset, test_size=.4, random_state=123)
     trainx, trainy = train.drop(columns='y'), train['y']
+    trainx = 1
+    # res = ridge_alpha_tuning(alpha, StandardScaler(), trainx, trainy, cv=2)
+    # assert res == "train_x should be data frame"
+    with pytest.raises(TypeError) as e_info:
+        ridge_alpha_tuning(alpha, StandardScaler(), trainx, trainy, cv=2)
+    assert "train_x should be data frame" in str(e_info.value)
 
-    ridge_alpha_tuning()
+def test_ridgealphatuning_4():
+    alpha = [1, 10, 100]
+    toy_dataset = DataFrame({
+        'x1': [1, 2, 3, 4, 6, 7, 8, 9, 0],
+        'x2': [1, 2, 3, 4, 5, 6, 7, 8, 10],
+        'y': [2, 3, 4, 5, 6, 7, 7, 8, 9]
+    })
+    train, test = train_test_split(toy_dataset, test_size=.4, random_state=123)
+    trainx, trainy = train.drop(columns='y'), train['y']
+    trainy = 1213
+    with pytest.raises(TypeError) as e_info:
+        ridge_alpha_tuning(alpha, StandardScaler(), trainx, trainy, cv=2)
+    assert "train_y should be data frame" in str(e_info.value)
+
+def test_ridgealphatuning_5():
+    alpha = [1, 10, 100]
+    toy_dataset = DataFrame({
+        'x1': [1, 2, 3, 4, 6, 7, 8, 9, 0],
+        'x2': [1, 2, 3, 4, 5, 6, 7, 8, 10],
+        'y': [2, 3, 4, 5, 6, 7, 7, 8, 9]
+    })
+    train, test = train_test_split(toy_dataset, test_size=.4, random_state=123)
+    trainx, trainy = train.drop(columns='y'), train['y']
+    with pytest.raises(TypeError) as e_info:
+        ridge_alpha_tuning(alpha, StandardScaler(), trainx, trainy, cv="two")
+    assert "cv should be an integer" in str(e_info.value)
+
+
