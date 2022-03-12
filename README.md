@@ -27,7 +27,7 @@ This project can be replicated using Docker.
 
 Steps:
 
-* Install Docker if you have not already done so
+* Install Docker if you have not already done so. This is hardware specific and is specified here:https://docs.docker.com/get-docker/
 * Clone this repository to your local machine
 * Using the command line/terminal, navigate to the repository directory
 * Type the following:
