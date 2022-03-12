@@ -7,7 +7,6 @@ from sklearn.preprocessing import StandardScaler
 
 from sklearn.linear_model import RidgeCV
 
-
 def test_ridgealphatuning_fullfunc():
     alpha = [1, 5, 12]
     toy_dataset = DataFrame({
@@ -17,13 +16,11 @@ def test_ridgealphatuning_fullfunc():
     })
     train, test = train_test_split(toy_dataset, test_size=.4, random_state=123)
     trainx, trainy = train.drop(columns='y'), train['y']
-    # pip = Pipeline(steps= [('passthrough')])
     cv_pipe = make_pipeline(StandardScaler(), RidgeCV(alphas=alpha, cv=2))
     cv_pipe.fit(trainx, trainy)
     best_a = cv_pipe.named_steps['ridgecv'].alpha_
     print(best_a)
     assert ridge_alpha_tuning(alpha, StandardScaler(), trainx, trainy, cv=2) == best_a
-
 
 def test_ridgealphatuning_alpha():
     alpha = 1
@@ -34,8 +31,6 @@ def test_ridgealphatuning_alpha():
     })
     train, test = train_test_split(toy_dataset, test_size=.4, random_state=123)
     trainx, trainy = train.drop(columns='y'), train['y']
-    # res = ridge_alpha_tuning(alpha, StandardScaler(), trainx, trainy, cv=2)
-    # assert res == "alpha is not a list"
     with pytest.raises(TypeError) as e_info:
         ridge_alpha_tuning(alpha, StandardScaler(), trainx, trainy, cv=2)
     assert "alpha is not a list" in str(e_info.value)
@@ -50,8 +45,6 @@ def test_ridgealphatuning_trainx():
     train, test = train_test_split(toy_dataset, test_size=.4, random_state=123)
     trainx, trainy = train.drop(columns='y'), train['y']
     trainx = 1
-    # res = ridge_alpha_tuning(alpha, StandardScaler(), trainx, trainy, cv=2)
-    # assert res == "train_x should be data frame"
     with pytest.raises(TypeError) as e_info:
         ridge_alpha_tuning(alpha, StandardScaler(), trainx, trainy, cv=2)
     assert "train_x should be data frame" in str(e_info.value)
@@ -82,5 +75,3 @@ def test_ridgealphatuning_cv():
     with pytest.raises(TypeError) as e_info:
         ridge_alpha_tuning(alpha, StandardScaler(), trainx, trainy, cv="two")
     assert "cv should be an integer" in str(e_info.value)
-
-
