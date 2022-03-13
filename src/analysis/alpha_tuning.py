@@ -4,29 +4,29 @@ from sklearn.pipeline import make_pipeline
 from sklearn.linear_model import RidgeCV
 
 def ridge_alpha_tuning(alpha, processor, trainx, trainy, cv=10):
-    '''
-        A function used to format a pandas generic histograms
+    """
+    A function used to format a pandas generic histograms
 
-        Parameters
-        ----------
-        alpha: List of integer
-                A list of Hyperparameter used to tune Ridge
-        processor: chaining of sklearn estimators
-                   Estimators used to transform a given dataset
-        trainx: pandas DataFrame
-                    A dataframe that contains the training set for Ridge
-        trainy: pandas Series
-                    A Series of classifications for a given observation
-        cv: An integer
-                Integer represent the number of cross validation
-        Raises
-        ------
-        TypeError:
-            if the alpha is not the correct type
-            if the cv is not the correct type
-            if the trainx is not the correct type
-            if the trainy is not the correct type
-        '''
+    Parameters
+    ----------
+    alpha: List of integer
+            A list of Hyperparameter used to tune Ridge
+    processor: chaining of sklearn estimators
+                Estimators used to transform a given dataset
+    trainx: pandas DataFrame
+                A dataframe that contains the training set for Ridge
+    trainy: pandas Series
+                A Series of classifications for a given observation
+    cv: An integer
+            Integer represent the number of cross validation
+    Raises
+    ------
+    TypeError:
+        if the alpha is not the correct type
+        if the cv is not the correct type
+        if the trainx is not the correct type
+        if the trainy is not the correct type
+    """
     if not isinstance(alpha, list):
         raise TypeError("alpha is not a list")
     if not isinstance(trainx, pd.DataFrame):

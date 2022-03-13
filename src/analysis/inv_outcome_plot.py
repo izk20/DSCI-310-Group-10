@@ -11,7 +11,7 @@ def inv_outcome_plot(grouped_df: pd.DataFrame,
                      fig_title: str,
                      fig_ylabel: str):
     
-    '''
+    """
     The function inv_outcome_plot generates a normalized stacked bar charts showing proportions of 
     major earner/non major earner individuals that made money on investments 
     and proportion of individuals that lost money on investments among families 
@@ -54,8 +54,7 @@ def inv_outcome_plot(grouped_df: pd.DataFrame,
         if major_earner is not a Boolean
         if fig_title is not a String
         if fig_ylabel is not a String
-    
-    '''
+    """
     if not isinstance(grouped_df, pd.DataFrame):
         raise TypeError("grouped_df is not a DataFrame")
     if not isinstance(size_col, str):
@@ -72,20 +71,16 @@ def inv_outcome_plot(grouped_df: pd.DataFrame,
         raise TypeError("fig_title is not inputted as String")
     if not isinstance(fig_ylabel, str):
         raise TypeError("fig_ylabel is not inputted as String")
-   
-    # if grouped_df.dtypes.dtype != 'O':
-    #     raise TypeError("grouped_df is not a DataFrame object")
-    if grouped_df[size_col].dtypes !=  'int64':
+
+    if grouped_df[size_col].dtypes !=  "int64":
         raise TypeError("size_col must be column of integers")
-    if grouped_df[bar_split_col].dtypes !=  'int64' or grouped_df[bar_split_col].nunique() != 2:
+    if grouped_df[bar_split_col].dtypes !=  "int64" or grouped_df[bar_split_col].nunique() != 2:
         raise TypeError("bar_split_col must be a binary column of integers with only 2 distinct values")
-    if grouped_df[val_col].dtypes !=  'bool':
+    if grouped_df[val_col].dtypes !=  "bool":
         raise TypeError("val_col must be column of boolean")
-    if grouped_df[counts_col].dtypes !=  'int64':
+    if grouped_df[counts_col].dtypes !=  "int64":
         raise TypeError("counts_col must be column of integers")
-        
-    
-    
+            
     family_sizes = [1, 2, 3, 4, 5, 6, 7]
     
     all_maj_earners = grouped_df[grouped_df[bar_split_col] == 1]
@@ -111,16 +106,14 @@ def inv_outcome_plot(grouped_df: pd.DataFrame,
     width = 0.35
     fig, ax = plt.subplots()
 
-    ax.bar(family_sizes, made_money_pctg, width, label='Money made on investments')
+    ax.bar(family_sizes, made_money_pctg, width, label="Money made on investments")
     ax.bar(family_sizes, not_made_money_pctg, width, bottom=made_money_pctg,
-       label='No money made on investments')
+       label="No money made on investments")
     
-    ax.set_xlabel('Family Size')
+    ax.set_xlabel("Family Size")
     ax.set_ylabel(fig_ylabel)
     ax.set_title(fig_title)
-
     ax.legend()
-
     
     return fig
         

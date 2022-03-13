@@ -3,7 +3,7 @@ from sklearn.model_selection import train_test_split
 
 def split_drop(data, test_size, rn, col):
     
-    '''
+    """
     Splits the given dataset into a training set and a testing set, 
     further splitting each set into one without a specified column,
     and one with only said specified column.
@@ -31,7 +31,7 @@ def split_drop(data, test_size, rn, col):
         if specified column is not in the dataset
         if dataset has less than 10 observations
     
-    '''
+    """
     if not isinstance(data, pd.DataFrame):
         raise TypeError("data should be a dataframe")
     if not isinstance(rn, int):
