@@ -59,22 +59,22 @@ def inv_outcome_plot(grouped_df: pd.DataFrame,
     if not isinstance(grouped_df, pd.DataFrame):
         raise TypeError("grouped_df is not a DataFrame")
     if not isinstance(size_col, str):
-        raise TypeError("size_col is not a String")
+        raise TypeError("size_col is not inputted as String")
     if not isinstance(bar_split_col, str):
-        raise TypeError("bar_split_col is not a String")
+        raise TypeError("bar_split_col is not inputted as String")
     if not isinstance(val_col, str):
-        raise TypeError("val_col is not a String")
+        raise TypeError("val_col is not inputted as String")
     if not isinstance(counts_col, str):
-        raise TypeError("size_col is not a String")
+        raise TypeError("counts_col is not inputted as String")
     if not isinstance(major_earner, bool):
-        raise TypeError("major_erarner is not a Boolean")
+        raise TypeError("major_earner is not inputted as Boolean")
     if not isinstance(fig_title, str):
-        raise TypeError("fig_title is not a String")
+        raise TypeError("fig_title is not inputted as String")
     if not isinstance(fig_ylabel, str):
-        raise TypeError("fig_ylabel is not a String")
+        raise TypeError("fig_ylabel is not inputted as String")
    
-    if grouped_df.dtypes.dtype != 'O':
-        raise TypeError("grouped_df is not a DataFrame object")
+    # if grouped_df.dtypes.dtype != 'O':
+    #     raise TypeError("grouped_df is not a DataFrame object")
     if grouped_df[size_col].dtypes !=  'int64':
         raise TypeError("size_col must be column of integers")
     if grouped_df[bar_split_col].dtypes !=  'int64' or grouped_df[bar_split_col].nunique() != 2:
@@ -121,5 +121,6 @@ def inv_outcome_plot(grouped_df: pd.DataFrame,
 
     ax.legend()
 
-    plt.show()
+    
+    return fig
         
