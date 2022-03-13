@@ -7,5 +7,5 @@ RUN conda install --y \
     seaborn=0.11.2 \
     matplotlib=3.4.3
     
- RUN pip install --y pytest=6.2.5
+ RUN conda install -c anaconda pytest=6.2.5
 
