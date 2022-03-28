@@ -42,23 +42,6 @@ def train_test_drop(data, dropped_col, train_path, test_path):
     X_train, Y_train, X_test, Y_test = split_drop(data, 0.3, 123, dropped_col)
     # write to file data/train and data/test
     return X_train, Y_train, X_test, Y_test
-
-
-def create_pipeline(binary, category):
-    binary_fea = binary
-    cate_fea = category
-    cate_trans = make_pipeline(OrdinalEncoder(categories = [[1, 2, 3, 4, 5, 6, 7]], dtype=int))
-    binary_trans = make_pipeline(OneHotEncoder(drop="if_binary"))
-    preprocessor = make_column_transformer(
-        (binary_trans, binary_fea),
-        (cate_trans,cate_fea)
-)
-    return preprocessor
-    
-    
-def create_reduced_dataframe(train, preprocessor):
-    
-    train_processed = preprocessor.fit_transform(train)
     
 
 
@@ -67,8 +50,6 @@ def main(read_path, out_path, processed_path, train_path, test_path):
     reduced_data = read_trim(read_path, ['EFSIZE', 'USHRWK', 'ATINC', 'HLEV2G', 'EFINVA', 'EFMJIE', 'EFATINC', 'EFMJSI'])
     processed = process(reduced_data)
     X_train, Y_train, X_test, Y_test = train_test_drop(processed, "EFINVA")
-    preprocessor = create_pipeline("EFMJIE", "EFSIZE")
-    reduced_dataframe = create_reduced_dataframe(X_train, preprocessor)
     
     
     
