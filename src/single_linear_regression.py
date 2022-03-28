@@ -2,11 +2,10 @@
 # date: 2022-03-25
 
 """
-Usage: src/hyperparameter_optimization.py --xtrain=<xtrain> --ytrain=<ytrain> --variables = <variables>
+Usage: src/hyperparameter_optimization.py --xtrain=<xtrain> --ytrain=<ytrain
 Options:
 --xtrain=<xtrain>:    csv file previously saved in the previous script the training data for the x-axis of ridge regression
 --ytrain=<ytrain>:     csv file previously saved int the previous script the training data for the y-axis of ridge regression
---variables = <variables>:  A list of variables which contains both binary and categories feature of processor.
 """
 
 from docopt import docopt
