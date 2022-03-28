@@ -2,27 +2,36 @@
 # date: 2022-03-25
 
 """
-Usage: src/down_data.py --preprocessor=<preprocessor> --trainx=<xtrain> --trainy=<ytrain>
+Usage: src/read_process_script.py --data=<reduced_data>
 Options:
---preprocessor=<preprocessor>   The preprocessor which generated in previous scirpt
---trainx=<xtrain>                The splited X-train dataframe
---trainy=<ytrain>               The splited Y_train dataframe
-""" -> __doc__
+--data<reduced_data>   The data set which previously processed before.
+"""
 
 from docopt import docopt
-import requests
-import os
+import numpy as np
 import pandas as pd
-import feather
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import  OneHotEncoder,OrdinalEncoder
+from sklearn.compose import make_column_transformer
+from analysis.alpha_tuning import ridge_alpha_tuning
+from analysis.split_drop import split_drop
 
 opt = docopt(__doc__)
-
-def main(preprocessor, xtrain, out_file):
-  alphas = list(10.0 ** np.arange(-2, 5, 1))
-  best_alpha = ridge_alpha_tuning(alphas,preprocessor,X_train,Y_train)
-  display('The best alpha from ridge hyperparameter tuning is:', best_alpha)
-  ridge_pipeline = make_pipeline(preprocessor, Ridge(alpha=best_alpha))
-  cv_ridge = pd.DataFrame(cross_validate(ridge_pipeline, X_train, Y_train, cv=10, return_train_score=True))
+def main(reduced_data):
+    processed = reduced_data[["EFINVA","EFSIZE","EFMJIE"]]
+    X_train, Y_train, X_test, Y_test = split_drop(processed, 0.3, 123, "EFINVA")
+    binary_fea =["EFMJIE"]
+    cate_fea = ["EFSIZE"]
+    cate_trans = make_pipeline(OrdinalEncoder(categories = [[1, 2, 3, 4, 5, 6, 7]], dtype=int))
+    binary_trans = make_pipeline(OneHotEncoder(drop="if_binary"))
+    preprocessor = make_column_transformer(
+        (binary_trans, binary_fea),
+        (cate_trans,cate_fea))
+    train_processed = preprocessor.fit_transform(X_train)
+    alphas = list(10.0 ** np.arange(-2, 5, 1))
+    best_alpha = ridge_alpha_tuning(alphas,preprocessor,X_train,Y_train)
+    print(best_alpha)
+    train_processed.to_csv('raw_data.csv', index=False)
 
 if __name__ == "__main__":
-  main(opt["--preprocessor"], opt["--trainx"], opt["--trainy"])
+  main(opt["--data"])
