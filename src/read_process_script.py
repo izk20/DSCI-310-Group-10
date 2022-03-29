@@ -8,7 +8,6 @@
 
  Options:
  --read_path=<read_path>    Path of the file to read
- --out_path=<out_path>    path to the cleaned dataset object created
  --processed_path=<processed_path>    path to the processed dataset object created, before the training/testing split
  --train_path=<train_path> path to the training data
  --test_path=<test_path> path to the testing data
@@ -33,31 +32,30 @@ def process(data, processed_path):
     data = data.drop(columns = 'USHRWK') 
     data = data.loc[reduced_data['ATINC'] != 99999996] 
     processed = data[["EFINVA","EFSIZE","EFMJIE"]]
-    # write to file data
     return processed    # should I split into 3?
 
 
 
 def train_test_drop(data, dropped_col, train_path, test_path):
     X_train, Y_train, X_test, Y_test = split_drop(data, 0.3, 123, dropped_col)
-    # write to file data/train and data/test
     return X_train, Y_train, X_test, Y_test
     
 
+def write_to_csv(data, path, filename):
+    data.to_csv(path + filename, index=True)
+    
+    
 
-
-def main(read_path, out_path, processed_path, train_path, test_path):
+def main(read_path, processed_path, train_path, test_path):
     reduced_data = read_trim(read_path, ['EFSIZE', 'USHRWK', 'ATINC', 'HLEV2G', 'EFINVA', 'EFMJIE', 'EFATINC', 'EFMJSI'])
     processed = process(reduced_data)
     X_train, Y_train, X_test, Y_test = train_test_drop(processed, "EFINVA")
-    
-    
-    
+    write(X_train, train_path,"X_train.csv")
+    write(Y_train, train_path, "Y_train.csv")
+    write(X_test, test_path, "X_test.csv")
+    write(Y_test, test_path ,"Y_test.csv")
+    write(processed, processed_path, "processed.csv")
 
-    
-    
-
-    reduced_dataframe.to_csv(out_path, index = False)
     
     
 main(opt["--read_path"], opt["--out_path"], opt[["--cols_kept"]])
