@@ -4,11 +4,11 @@
 ''' A script that sets a universal seed, reads the dataset used for the analysis
  from specified path, and processes the data for the EDA.
 
- Usage:
+ Usage: read_process_script.py
 
  Options:
- --read_path=<read_path>    Path of the file to read
- --processed_path=<processed_path>    path to the processed dataset object created, before the training/testing split
+ --read_path=<read_path>  path of the file to read
+ --processed_path=<processed_path>  path to the processed dataset object created, before the training/testing split
  --train_path=<train_path> path to the training data
  --test_path=<test_path> path to the testing data
 
@@ -18,9 +18,9 @@ import numpy as np
 import pandas as pd
 from docopt import docopt
 
-np.random.seed(1)
-
 opt = docopt(__doc__)
+
+np.random.seed(1)
 
 def read_trim(read_path, chosen_cols):
     data = pd.read_csv(read_path, header=None)
@@ -55,9 +55,9 @@ def main(read_path, processed_path, train_path, test_path):
     write(X_test, test_path, "X_test.csv")
     write(Y_test, test_path ,"Y_test.csv")
     write(processed, processed_path, "processed.csv")
-
+  
     
     
-main(opt["--read_path"], opt["--out_path"], opt[["--cols_kept"]])
+main(opt["--read_path"], opt["--processed_path"], opt["--train_path"], opt["--test_path"])
 
 
