@@ -3,6 +3,7 @@
 
 """
 Usage: src/read_process_script.py --xtrain=<xtrain> --ytrain=<ytrain> --variables = <variables>
+
 Options:
 --xtrain=<xtrain>:    csv file previously saved in the previous script the training data for the x-axis of ridge regression
 --ytrain=<ytrain>:     csv file previously saved int the previous script the training data for the y-axis of ridge regression

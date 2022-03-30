@@ -2,7 +2,8 @@
 # date: 2022-03-25
 
 """
-Usage: src/hyperparameter_optimization.py --xtrain=<xtrain> --ytrain=<ytrain
+Usage: src/hyperparameter_optimization.py --xtrain=<xtrain> --ytrain=<ytrain>
+
 Options:
 --xtrain=<xtrain>:    csv file previously saved in the previous script the training data for the x-axis of ridge regression
 --ytrain=<ytrain>:     csv file previously saved int the previous script the training data for the y-axis of ridge regression
