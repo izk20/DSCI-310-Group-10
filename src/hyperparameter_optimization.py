@@ -29,12 +29,14 @@ def make_processor(binary_fea, cate_fea):
 
 
 def main(xtrainpath, ytrainpath, variables):
+    variables = [x for x in variables.split(',')]
+    # print(args)
     xtrain = pd.read_csv(xtrainpath)
     ytrain = pd.read_csv(ytrainpath)
-    # raise ImportError(ytrain)
+    # raise ImportError(xtrain)
     preprocessor = make_processor(variables[0], variables[1])
-    # raise ImportError(variables)
-    train_processed = preprocessor.fit_transform(xtrain)
+    # raise ImportError(variables[0])
+    train_processed = preprocessor.fit_transform(xtrain,ytrain)
     alphas = list(10.0 ** np.arange(-2, 5, 1))
     best_alpha = ridge_alpha_tuning(alphas, preprocessor, xtrain, ytrain)
     print(best_alpha)
