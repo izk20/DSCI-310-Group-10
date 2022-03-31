@@ -1,16 +1,116 @@
 ---
 title: "Analysis_of_Investment_Outcome_Predictor_Report"
-output: html_document
+author: "Nikko Dumrique, Mahdi Heydar, Harry Zhang, Ahmed Rizk"
+output:
+  bookdown::html_document2:
+    toc: true
+    number_sections: false
+  bookdown::pdf_document2:
+    toc: true
+    number_sections: false
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+## Summary
+The goal of this analysis is to investigate the economic family's investment income, where the true class indicates money was made on investments, and the false class indicates breaking even or money lost. The report examines its relationship with family size, the economic family's major income earner, the income after tax, and other related variables to determine whether or not its possible to predict it using those variables or a subset of them. The data is obtained from Statistics Canada's 2017 Canadian Income Survey [1]. 
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
+## Introduction
+It is estimated that roughly 39% of Canadians invest in stocks, putting Canada in 6th place among 16 countries for share of retail investors [2]. As every generation makes their first investments earlier than their predecessors [3], the importance of gauging and predicting the success of said investments arises.
+
+Families of most wealth levels and sizes have been steadily placing an emphasis on maintaining passive income and generational wealth, through a variety of ways that range from real estate ownership to family offices [4].
+In this analysis, we are particularly interested in the family size and its relationship to the investment income.
+
+The economic family is defined by Statistics Canada as "a group of two or more persons who live in the same dwelling and are related to each other by blood, marriage, common-law union, adoption or a foster relationship" [5]. 
+
+We will examine the investment income of the economic family with the aim of identifying whether or not we can predict it using the economic family size and the major income earner. 
+
+There are other variables of interest that may also be useful in the context of the predictive analysis. We hypothesize that the average number of weekly working hours for the major source of income, their highest level of education and their income after tax may affect the economic family's investment income. Furthermore, the economic family's income after tax may be a strong candidate as a predictor variable, although there are some reservations due to it possibly being too collinear with the investment income. 
+
+
+## Research Question
+  - How do economic family size and the major income earner in a family influence familial investment income outcome, where the true class indicates money was made on investments, and the false class indicates breaking even or money lost.
+
+    - It should be noted that the question initially aimed to predict the numerical value of the investment, but the accuracy obtained showed a regression problem to be unsuitable (see report), so the problem was altered to a classification problem.
+    
+## Dataset Description
+Canadian Income Survey (CIS) is a cross-sectional survey sponsored both by the Government of Canada and Statistics Canada. The purpose of this survey is to collect information from all Canadian citizens and households. However, around 2% of the residents in reserve aboriginal settlements or small population, extremely remote areas are not included in this survey. The data was collected with several different characteristics in mind including labour market activity, school attendance, disability, support payments, child care expenses, inter-household transfers. It also combines some information from the Labour Force Survey (LFS), such as the information about the education level and geography. This data set is available to all organizations, different levels of the government, and individuals. Different government levels could use this dataset to make economic well policies to all Canadians.
+
+### Description of Relevant Variables
+The original dataset contains 194 variables. However, our analysis is only concerned with 8, narrowed down using the aforementioned studies and assumptions. The description contains only those specified variables.
+
+Description of the Relevant Variables:  
+
+* EFSIZE: The number of economic family members: It is numeric, discrete and has a range of 1-7. 
+
+* USHRWK: The average weekly working hours in the year. It is a numeric variable.
+
+* ATINC: The total annual income before tax for each sampling unit. It is numeric, continuous, and has a range of -70395 to 825710.
+
+* HLEV2G: The highest education level for each sampling unit. It is discrete and categorical, but represented with a number code. 
+
+    * 1: Less than high school graduation
+    * 2: Graduated high school or partial postsecondary education
+    * 3: Non-university postsecondary certificate or diploma
+    * 4: University degree or certificate
+    * 6: Valid skip
+    * 9: Not stated
+    
+
+* EFINVA: The total investment income. It is a numeric and continuous variable. It also includes the net partnership income and net rental income.  
+
+* EFMJIE: A binary variable, representing whether or not the individual is the Major income earner of the economic family.
+
+* EFATINC: The total annual income after tax for each economic family. It is numeric, with a range of -39850 to 1128860.
+
+* EFMJSI: A discrete, categorical variable, which represents the major source of income for each economic family. The levels are represented using a number code.
+    * 01: No income
+    * 02: Wages and salaries
+    * 03: Self-employment income
+    * 04: Government transfers
+    * 05: Investment income 
+    * 06: Retirement pensions
+    * 07: Other income
+    
+    
+# Premliminary Analysis
+
+### Loading Data
+
+```{python import}
+# Importing the appropriate packages
+import numpy as np
+import pandas as pd
+import sklearn as sk
+from sklearn.pipeline import Pipeline, make_pipeline
+from sklearn.preprocessing import StandardScaler, OneHotEncoder,OrdinalEncoder
+from sklearn.compose import ColumnTransformer, make_column_transformer
+from sklearn.model_selection import train_test_split
+from sklearn.model_selection import RandomizedSearchCV, cross_validate
+from sklearn.metrics import plot_confusion_matrix
+from sklearn.linear_model import Ridge, RidgeCV
+import seaborn as sns
+import matplotlib.pyplot as plt
+from sklearn.neighbors import KNeighborsClassifier
+
+import sys
+sys.path.append('..')
+from src.analysis.format_histograms import format_histograms
+from src.analysis.alpha_tuning import ridge_alpha_tuning
+from src.analysis.KNN_tuning import KNN_tuning
+from src.analysis import inv_outcome_plot
+from src.analysis.split_drop import split_drop
+```
+
+
+
+
+    
+    
+# !!!TODO: Delete
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
 ```{r cars}
