@@ -2,7 +2,7 @@
 # date: 2022-03-25
 
 """
-Usage: src/read_process_script.py --xtrainpath=<xtrainpath> --ytrainpath=<ytrainpath> --variables=<variables>
+Usage: src/read_process_script.py --xtrainpath=<xtrainpath> --ytrainpath=<ytrainpath> --variables=sss<variables>
 python src/read_process_script.py --xtrainpath='' --ytrainpath=<ytrainpath> --variables=<variables>
 
 Options:
@@ -31,6 +31,9 @@ def make_processor(binary_fea, cate_fea):
     )
     return preprocessor
 
+def pickle_save(name, variable):
+    with open(name,"wb") as f:
+        pickle.dump(variable, f)
 
 
 def main(xtrainpath, ytrainpath, variables):
