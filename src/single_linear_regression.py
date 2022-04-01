@@ -2,11 +2,11 @@
 # date: 2022-03-25
 
 """
-Usage: src/hyperparameter_optimization.py --xtrain=<xtrainpath> --ytrain=<ytrainpath>
+Usage: src/hyperparameter_optimization.py --xtrainpath=<xtrainpath> --ytrainpath=<ytrainpath>
 
 Options:
---xtrain=<xtrainpath>:    csv file previously saved in the previous script the training data for the x-axis of ridge regression
---ytrain=<ytrainpath>:     csv file previously saved int the previous script the training data for the y-axis of ridge regression
+--xtrainpath=<xtrainpath>:    csv file previously saved in the previous script the training data for the x-axis of ridge regression
+--ytrainpath=<ytrainpath>:     csv file previously saved int the previous script the training data for the y-axis of ridge regression
 """
 
 from docopt import docopt

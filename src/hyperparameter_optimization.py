@@ -32,21 +32,21 @@ def make_processor(binary_fea, cate_fea):
 
 def main(xtrainpath, ytrainpath, variables):
     variables = [x for x in variables.split(',')]
-    print(variables)
+    # print(variables)
     xtrain = pd.read_csv(xtrainpath)
-    print(xtrain.head())
+    # print(xtrain.shape)
     ytrain = pd.read_csv(ytrainpath)
-    print(ytrain)
+    # print(ytrain)
     # # raise ImportError(type(ytrain.loc[:,[0]]))
-    preprocessor = make_processor("EFSIZE","EFMJIE")
+    preprocessor = make_processor([variables[0]],[variables[1]])
     # raise ImportError(preprocessor)
     train_processed = preprocessor.fit_transform(xtrain)
-    # alphas = list(10.0 ** np.arange(-2, 5, 1))
-    # best_alpha = ridge_alpha_tuning(alphas, preprocessor, xtrain, ytrain)
-    # print(best_alpha)
-    # train_processed.to_csv( "results/train_processed.csv")
-    # best_alpha.to_csv("results/best_alpha.csv")
-    # pickle.dump(preprocessor, open("results/preprocessor.pickle", "wb"))
+    alphas = list(10.0 ** np.arange(-2, 5, 1))
+    best_alpha = ridge_alpha_tuning(alphas, preprocessor, xtrain, ytrain)
+    print(best_alpha)
+    train_processed.to_csv( "results/train_processed.csv")
+    best_alpha.to_csv("results/best_alpha.csv")
+    pickle.dump(preprocessor, open("results/preprocessor.pickle", "wb"))
 
 
 if __name__ == "__main__":
