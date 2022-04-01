@@ -17,7 +17,7 @@ def format_histograms(df, texts = {}, fontsize = 20):
     ValueError:
         if the texts parameter is empty.
     """
-    if not texts: raise ValueError("Parameter "texts" is empty")
+    if not texts: raise ValueError("Parameter 'texts' is empty")
     histograms = df.hist(bins=25, figsize=(30, 25))
     histograms = histograms.flatten()
     for i, hist in enumerate(histograms): 

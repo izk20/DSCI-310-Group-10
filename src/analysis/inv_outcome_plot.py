@@ -116,4 +116,5 @@ def inv_outcome_plot(grouped_df: pd.DataFrame,
     ax.legend()
     
     return fig
+
         
