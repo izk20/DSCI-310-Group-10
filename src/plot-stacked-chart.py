@@ -3,14 +3,14 @@
     and proportion of individuals that lost money on investments among families 
     of different size
 
-Usage: plot-stacked-chart.py --final_pipeline_path=<final_pipeline_path> --test_2_path=<test_2_path> --X_test_2_path<X_test_2_path> --plot_number=<plot_number> --output_file=<output_file>
+Usage: plot-stacked-chart.py --pipeline_path=<pipeline_path> --test_2_p=<test_2_p> --X_test_2_p=<X_test_2_p> --plot_number=<plot_number> --output_file=<output_file>
 
 Options:
---final_pipeline_path=<final_pipeline_path>         Path to final pipeline object
---test_2_path=<test_2_path>                         Path to test_2 dataframe object
---X_test_2_path=<X_test_2_path>                     Path to training set made from test_2 dataframe object
---plot_number=<plot_number>                         Natural number in range [1,4] corresponding to which plot
---output_file=<output_file>                         Path (including filename) of where to locally write the figures
+--pipeline_path=<pipeline_path>         Path to final pipeline object
+--test_2_p=<test_2_p>                   Path to test_2 dataframe object
+--X_test_2_p=<X_test_2_p>               Path to training set made from test_2 dataframe object
+--plot_number=<plot_number>             Natural number in range [1,4] corresponding to which plot
+--output_file=<output_file>             Path (including filename) of where to locally write the figures
 
 """
   
@@ -21,11 +21,11 @@ from analysis.inv_outcome_plot import inv_outcome_plot
 
 opt = docopt(__doc__)
 
-def main(final_pipeline_path, test_2_path, X_test_2_path, plot_number, output_file):
-    
-    pipe_final = pd.read_pickle(final_pipeline_path)
-    test_2 = pd.read_pickle(test_2_path)
-    X_test_2 = pd.read_pickle(X_test_2_path)
+def main(pipeline_path, test_2_p, X_test_2_p, plot_number, output_file):
+    print("1")
+    pipe_final = pd.read_pickle(pipeline_path)
+    test_2 = pd.read_pickle(test_2_p)
+    X_test_2 = pd.read_pickle(X_test_2_p)
     
     predictions_df = pd.DataFrame(data=pipe_final.predict(X_test_2),
                              columns = ["Pred_EFINVA_Made_Money"],
@@ -40,6 +40,7 @@ def main(final_pipeline_path, test_2_path, X_test_2_path, plot_number, output_fi
 
     grouped_df = grouped_true_pred
     
+    print("1")
     
     title_1 = """
     Figure 6:
@@ -126,7 +127,7 @@ def main(final_pipeline_path, test_2_path, X_test_2_path, plot_number, output_fi
     
 if __name__ == "__main__":
     print("1")
-    main(opt["--grouped_df_path"], opt["--plot_number"], opt["--output_file"])
+    main(opt["--pipeline_path"], opt["--test_2_p"], opt["--X_test_2_p"], opt["--plot_number"], opt["--output_file"])
 
     
     
