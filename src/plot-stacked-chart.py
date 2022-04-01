@@ -55,11 +55,7 @@ def main(grouped_df_path, plot_number, output_file):
     ylabel_4 = """Proportion of Non-major Earners 
     Predicted with Investment Outcome"""
     
-    raise ImplementError("made it to one")
-
     if plot_number == 1:
-        print("1")
-        raise ImplementError("made it to one")
         fig1 = inv_outcome_plot.inv_outcome_plot(grouped_df,
                                  'EFSIZE',
                                  'EFMJIE',
@@ -106,6 +102,6 @@ def main(grouped_df_path, plot_number, output_file):
         
     
 
-    if __name__ == "__main__":
-        print('test')
-        main(opt["--grouped_df_path"], opt["--plot_number"], opt["--output_file"])
+if __name__ == "__main__":
+
+    main(opt["--grouped_df_path"], opt["--plot_number"], opt["--output_file"])
