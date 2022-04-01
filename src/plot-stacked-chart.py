@@ -3,18 +3,19 @@
     and proportion of individuals that lost money on investments among families 
     of different size
 
-Usage: plot-stacked-chart.py <grouped_df_path> <plot_number> <output_file>
+Usage: plot-stacked-chart.py --grouped_df_path=<grouped_df_path> --plot_number=<plot_number> --output_file=<output_file>
 
 Options:
-<grouped_df_path> Path to Dataframe of features grouped by all columns
-<plot_number>    Natural number in range [1,4] corresponding to which plot
-<output_file>    Path (including filename) of where to locally write the figure
+--grouped_df_path=<grouped_df_path>       Path to Dataframe of features grouped by all columns
+--plot_number=<plot_number>               Natural number in range [1,4] corresponding to which plot
+--output_file=<output_file>               Path (including filename) of where to locally write the figure
+
 """
   
 from docopt import docopt
 import pandas as pd
 import matplotlib.pyplot as plt
-from analysis import inv_outcome_plot
+from analysis.inv_outcome_plot import inv_outcome_plot
 
 opt = docopt(__doc__)
 
@@ -102,7 +103,9 @@ def main(grouped_df_path, plot_number, output_file):
                                  ylabel_4)
         fig4.tight_layout()
         fig4.savefig(output_file + "plot4.png")
+        
     
 
     if __name__ == "__main__":
-        main(opt["<grouped_df_path>"], opt["<plot_number>"], opt["<output_file>"])
+        print('test')
+        main(opt["--grouped_df_path"], opt["--plot_number"], opt["--output_file"])
