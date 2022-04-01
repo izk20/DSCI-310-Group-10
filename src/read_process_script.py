@@ -4,7 +4,7 @@
 ''' A script that sets a universal seed, reads the dataset used for the analysis
  from specified path, and processes the data for the EDA.
 
- Usage: read_process_script.py <read_path> <processed_path> <train_path> <test_path>
+ Usage: read_process_script.py --read_path=<read_path> --processed_path=<processed_path> --train_path=<train_path> --test_path=<test_path>
 
  Options:
  --read_path=<read_path>  path of the file to read
@@ -67,6 +67,6 @@ def main(read_path, processed_path, train_path, test_path):
     print("9")
     
     
-main(opt["<read_path>"], opt["<processed_path>"], opt["<train_path>"], opt["<test_path>"])
+main(opt["--read_path"], opt["--processed_path"], opt["--train_path"], opt["--test_path"])
 
 

@@ -3,7 +3,7 @@
 #
 ''' A script that performs the train test split, finds the best k value, visualizes results and fits the best KNN model using the best K
 
-   Usage: knn_classification_script.py <processed> <out_dir>
+   Usage: knn_classification_script.py --processed=<processed> --out_dir=<out_dir>
 
    Options:
  --processed=<processed>     Path (including filename) to processed data (which needs to be saved as a csv file)
@@ -104,6 +104,6 @@ def main(processed, out_dir):
     conf_mat(pipe_final, X_test_2, Y_test_2, out_dir, "conf_mat.png")
     print("7")
     
-main(opt["<processed>"], opt["<out_dir>"])
+main(opt["--processed"], opt["--out_dir"])
 
 
