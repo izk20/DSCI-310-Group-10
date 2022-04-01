@@ -14,6 +14,6 @@ Options:
 
 library(docopt)
 opt <- docopt(doc)
-
+ 
 
 download.file(opt$url, opt$out_dir)
