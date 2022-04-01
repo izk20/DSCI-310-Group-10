@@ -6,5 +6,7 @@ RUN conda install --y \
     scikit-learn=0.24.2 \
     seaborn=0.11.2 \
     matplotlib=3.4.3 \
-    pytest=7.0.1
+    pytest
+    
+
 
