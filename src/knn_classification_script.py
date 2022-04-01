@@ -13,6 +13,7 @@
 
 import numpy as np
 import pandas as pd
+import pickle
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import plot_confusion_matrix
 import matplotlib.pyplot as plt
@@ -96,8 +97,11 @@ def main(processed, out_dir):
     preprocessor_x = create_preprocessor("EFMJIE", "EFSIZE")
     print("3")
     results_df = tune_model(X_train_2, Y_train_2, preprocessor_x)
+    #to write 
+    with open("results_df", "wb") as f:
+        pickle.dump(results_df, f) 
     print("4")
-    elbow_plot(results_df, out_dir, "elbow_plot.png")
+    # elbow_plot(results_df, out_dir, "elbow_plot.png")
     print("5")
     pipe_final = create_pipeline(X_train_2, Y_train_2, X_test_2, Y_test_2, preprocessor_x)
     print("6")
