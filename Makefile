@@ -1,3 +1,4 @@
+
 # This driver script completes the graphical and textual analysis 
 # for the Analysis of Investment Outcome Predictor Report.
 # author: Nikko Dumrique, Mahdi Heydar, Ahmed Rizk, Harry Zhang
@@ -5,6 +6,7 @@
 
 #example usage:
 # make all
+
 
 all : data/raw/raw_data.csv
 
@@ -34,8 +36,9 @@ data/raw/raw_data.csv :
 # doc/Analysis_of_Investment_Outcome_report.md : doc/breast_cancer_predict_report.Rmd doc/breast_cancer_refs.bib
 # 	Rscript -e "rmarkdown::render('doc/breast_cancer_predict_report.Rmd')"
 
+
 clean: 
 	rm -rf data
 	rm -rf results
 	rm -rf doc/Analysis_of_Investment_Outcome_report.md doc/Analysis_of_Investment_Outcome_report.html
-			
+
