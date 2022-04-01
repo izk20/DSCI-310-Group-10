@@ -7,35 +7,35 @@
 #example usage:
 # make all
 
-all : doc/Analysis_of_Investment_Outcome_Predictor_report.md
 
-!!!TODO
-all: results/final_model.rds results/accuracy_vs_k.png results/predictor_distributions_across_class.png results/final_model_quality.rds doc/breast_cancer_predict_report.md
+all : data/raw/raw_data.csv
+
+# all: results/final_model.rds results/accuracy_vs_k.png results/predictor_distributions_across_class.png results/final_model_quality.rds doc/breast_cancer_predict_report.md
 
 # download data
-data/raw/<!!!>: src/<!!!>.py
-	python src/<!!!>.py 
+data/raw/raw_data.csv : 
+	Rscript src/download_dataset_script.r --url="https://onedrive.live.com/download?cid=3186CCDB0C6495E0&resid=3186CCDB0C6495E0%2157273&authkey=AK4_vAlM4AFx7_M" --out_dir=data/raw/raw_data.csv
+# # pre-process data 
+# data/processed/<!!!> data/processed/<!!!> : src/<!!!>.py
 
-# pre-process data 
-data/processed/<!!!> data/processed/<!!!> : src/<!!!>.py
+# # exploratory data analysis - Histograms
+# results/predictor_distributions_across_class.png : src/eda_wisc.r data/processed/training.feather
+# 	Rscript src/eda_wisc.r --train=data/processed/training.feather --out_dir=results
 
-# exploratory data analysis - Histograms
-results/predictor_distributions_across_class.png: src/eda_wisc.r data/processed/training.feather
-	Rscript src/eda_wisc.r --train=data/processed/training.feather --out_dir=results
+# # Hyperparameter tuning (here, find K for k-nn using 30 fold cv with Cohen's Kappa)
+# results/<!!!>.png results/<!!!>.png : src/<!!!>.py data/processed/
+# 	src/<!!!>.py data/processed/
 
-# Hyperparameter tuning (here, find K for k-nn using 30 fold cv with Cohen's Kappa)
-results/<!!!>.png results/<!!!>.png : src/<!!!>.py data/processed/
-	src/<!!!>.py data/processed/
+# # Visualized results
+# results/<!!!>.png : src/<!!!>.py data/processed/
+# 	src/<!!!>.py data/processed/
+# 	src/<!!!>.py data/processed/
+# 	src/<!!!>.py data/processed/
 
-# Visualized results
-results/<!!!>.png: src/<!!!>.py data/processed/
-	src/<!!!>.py data/processed/
-	src/<!!!>.py data/processed/
-	src/<!!!>.py data/processed/
+# # render report
+# doc/Analysis_of_Investment_Outcome_report.md : doc/breast_cancer_predict_report.Rmd doc/breast_cancer_refs.bib
+# 	Rscript -e "rmarkdown::render('doc/breast_cancer_predict_report.Rmd')"
 
-# render report
-doc/Analysis_of_Investment_Outcome_report.md : doc/breast_cancer_predict_report.Rmd doc/breast_cancer_refs.bib
-	Rscript -e "rmarkdown::render('doc/breast_cancer_predict_report.Rmd')"
 
 clean: 
 	rm -rf data

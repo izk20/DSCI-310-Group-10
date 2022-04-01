@@ -57,14 +57,12 @@ def create_preprocessor(binary, category):
     return preprocessor
 
 
-
 def tune_model(train1, train2, preprocessor):
     param_grid = {"n_neighbours": np.arange(1,50,5)}
     results_df = KNN_tuning(preprocessor,train1,train2,param_grid)
     return results_df
 
-    
-    
+     
 def elbow_plot(results, path, filename):
     elbow_plt = plt.plot(results['n_neighbours'], 
                     results['mean_cv_score'], 
@@ -86,27 +84,19 @@ def conf_mat(pipeline, data1, data2, path, filename):
     plt.savefig(path + filename)
 
 
-    
-
 def main(processed, out_dir):
-    print("1")
+
     processed = create_categ(processed, "EFINVA_Made_Money", "EFINVA")
-    print("2")
     train_2, test_2, X_train_2, Y_train_2, X_test_2, Y_test_2 = train_test_drop(processed, "EFINVA_Made_Money")
-    print("2.5")
     preprocessor_x = create_preprocessor("EFMJIE", "EFSIZE")
-    print("3")
     results_df = tune_model(X_train_2, Y_train_2, preprocessor_x)
     #to write 
     with open("results_df", "wb") as f:
         pickle.dump(results_df, f) 
-    print("4")
     # elbow_plot(results_df, out_dir, "elbow_plot.png")
-    print("5")
     pipe_final = create_pipeline(X_train_2, Y_train_2, X_test_2, Y_test_2, preprocessor_x)
-    print("6")
     conf_mat(pipe_final, X_test_2, Y_test_2, out_dir, "conf_mat.png")
-    print("7")
+    
     
 main(opt["--processed"], opt["--out_dir"])
 
