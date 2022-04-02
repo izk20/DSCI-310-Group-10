@@ -8,7 +8,7 @@
 # make all
 
 
-all : data/raw/raw_data.csv data/processed/preprocessing results/hyperparamter_opti
+all : data/raw/raw_data.csv data/processed/preprocessing results/hyperparamter_opti results/simple_linear_regression
 
 # all: results/final_model.rds results/accuracy_vs_k.png results/predictor_distributions_across_class.png results/final_model_quality.rds doc/breast_cancer_predict_report.md
 
@@ -26,6 +26,10 @@ data/processed/preprocessing: src/read_process_script.py
  # Hyperparameter tuning (here, find K for k-nn using 30 fold cv with Cohen's Kappa)
 results/hyperparamter_opti: src/hyperparameter_optimization_new.py
 	Python src/hyperparameter_optimization_new.py --xtrainpath="data/processed/X_train.pkl" --ytrainpath="data/processed/Y_train.pkl" --variables="EFSIZE,EFMJIE" --out_dir="result/"
+
+results/simple_linear_regression: src/single_linear_regression.py
+	python src/single_linear_regression.py --xtrainpath="data/processed/X_train.pkl" --ytrainpath="data/processed/Y_train.pkl" --preprocessorpath="result/preprocessor" --bestalpha="result/best_alpha" --path="result/"
+
 
 # # Visualized results
 # results/<!!!>.png : src/<!!!>.py data/processed/
