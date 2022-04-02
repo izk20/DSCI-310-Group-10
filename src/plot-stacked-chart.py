@@ -9,7 +9,7 @@ Options:
 --pipeline_path=<pipeline_path>         Path to final pipeline object
 --test_2_p=<test_2_p>                   Path to test_2 dataframe object
 --X_test_2_p=<X_test_2_p>               Path to training set made from test_2 dataframe object
---plot_number=<plot_number>             Natural number in range [1,4] corresponding to which plot
+--plot_number=<plot_number>             Natural number as string in range ["1","4"] corresponding to which plot
 --output_file=<output_file>             Path (including filename) of where to locally write the figures
 
 """
@@ -22,7 +22,6 @@ from analysis.inv_outcome_plot import inv_outcome_plot
 opt = docopt(__doc__)
 
 def main(pipeline_path, test_2_p, X_test_2_p, plot_number, output_file):
-    print("1")
     pipe_final = pd.read_pickle(pipeline_path)
     test_2 = pd.read_pickle(test_2_p)
     X_test_2 = pd.read_pickle(X_test_2_p)
@@ -39,11 +38,9 @@ def main(pipeline_path, test_2_p, X_test_2_p, plot_number, output_file):
     
 
     grouped_df = grouped_true_pred
-    
-    print("1")
+
     
     title_1 = """
-    Figure 6:
     The Relationship Between Family Size and 
     Investment Outcome Among Individuals
     Who are Major Earners In Their Family
@@ -52,7 +49,6 @@ def main(pipeline_path, test_2_p, X_test_2_p, plot_number, output_file):
     with Investment Outcome"""
 
     title_2 = """
-    Figure 7:
     The Relationship Between Family Size and 
     Investment Outcome Among Individuals
     Who are Non-major Earners In Their Family
@@ -61,7 +57,6 @@ def main(pipeline_path, test_2_p, X_test_2_p, plot_number, output_file):
     with Investment Outcome"""
 
     title_3 ="""
-    Figure 8:
     The KNN-Classification Results For Predicting
     Investment Income Outcome among Major Earners In Their Family
     """
@@ -69,7 +64,6 @@ def main(pipeline_path, test_2_p, X_test_2_p, plot_number, output_file):
     Predicted with Investment Outcome"""
 
     title_4 ="""
-    Figure 9:
     The KNN-Classification Results For Predicting
     Investment Income Outcome among Non-major Earners In Their Family
     """

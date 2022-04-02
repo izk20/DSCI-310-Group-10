@@ -2,12 +2,14 @@
 # date: 2022-03-25
 
 """
-Usage: single_linear_regression.py --xtrainpath=<xtrainpath> --ytrainpath=<ytrainpath> --preprocessorpath=<preprocessorpath> --bestalpha=<bestalpha>
+Usage: single_linear_regression.py --xtrainpath=<xtrainpath> --ytrainpath=<ytrainpath> --preprocessorpath=<preprocessorpath> --bestalpha=<bestalpha> --path=<path>
 
 Options:
 --xtrainpath=<xtrainpath>:    csv file previously saved in the previous script the training data for the x-axis of ridge regression
 --ytrainpath=<ytrainpath>:     csv file previously saved int the previous script the training data for the y-axis of ridge regression
 --preprocessorpath=<preprocessorpath>:   path for the preprocessor pickle file saved.
+--bestalpha=<bestalpha>:                 path for best alphs pickle
+--path=<path>:                           path for the downloading data
 
 """
 
@@ -37,25 +39,25 @@ def cross_validation(ridgepip,xtrain,ytrain):
 def write_csv(pd,out_dir):
     pd.to_csv(out_dir, index=True)
 
-def make_plot(cv_ridge):
+def make_plot(cv_ridge,path):
     ridge = plt.plot(np.arange(len(cv_ridge)),
                      cv_ridge['test_score'],
                      '-0')
     plt.title('Figure 3: RidgeCV Folds = 10')
     plt.xlabel('CV Fold Iterations')
     plt.ylabel('CV Accuracy')
-    plt.savefig("cv_plot.png")
+    plt.savefig(path+"cv_plot.png")
 
-def main(xtrainpath, ytrainpath,preprocessorpath,bestalpha):
-    xtrain = pd.read_csv(xtrainpath)
-    ytrain = pd.read_csv(ytrainpath)
+def main(xtrainpath, ytrainpath,preprocessorpath,bestalpha,path):
+    xtrain = pd.read_pickle(xtrainpath)
+    ytrain = pd.read_pickle(ytrainpath)
     preprocessor = pickle.load(open(preprocessorpath, "rb"))
     best_alpha = pickle.load(open(bestalpha,"rb"))
     ridge_pipeline = make_pipeline(preprocessor, Ridge(alpha=best_alpha))
     cv_ridge = pd.DataFrame(cross_validate(ridge_pipeline, xtrain, ytrain, cv=10, return_train_score=True))
-    write_csv(cv_ridge,"../data/cv_ridge.csv")
-    make_plot(cv_ridge)
+    write_csv(cv_ridge,"data/processed/cv_ridge.csv")
+    make_plot(cv_ridge,path)
 
 
 if __name__ == "__main__":
-    main(opt["--xtrainpath"], opt["--ytrainpath"], opt["--preprocessorpath"], opt["--bestalpha"])
+    main(opt["--xtrainpath"], opt["--ytrainpath"], opt["--preprocessorpath"], opt["--bestalpha"], opt["--path"])
