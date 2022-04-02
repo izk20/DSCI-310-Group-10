@@ -14,6 +14,8 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+
+
 ```{r r_load_packages, include=FALSE}
 library(reticulate)
 ```
@@ -114,7 +116,7 @@ Description of the Relevant Variables:
 
 ### Loading Data
 
-```{python data, out.width="50%"}
+```{python data, out.width="20"}
 data = pd.read_csv('../data/raw/raw_data.csv')
 first_5 = data.head()
 ```
@@ -139,7 +141,7 @@ The data is reduced to some specific features and targets of interest before EDA
 - The ATINC column contains the value 99999996 for observations that were skipped for the information for valid reasons. Therefore, these observations should be removed. 
 
 
-```{r fre-dist-plots, out.width="80%", fig.cap="Frequency Distributions of the chosen variables"}
+```{r fre-dist-plots, out.width="110", fig.align="center", fig.cap="Frequency Distributions of the chosen variables"}
 knitr::include_graphics("../result/histograms.png")
 ```
 
@@ -157,7 +159,7 @@ knitr::include_graphics("../result/histograms.png")
 
 ##### Note: correlations between categorical features should be ignored as these are invalid
 
-```{r corr-mat, out.width="80%", fig.cap="Matrix of correlations between various features"}
+```{r corr-mat, out.width="80%", fig.align="center", fig.cap="Matrix of correlations between various features"}
 knitr::include_graphics("../result/corr_mat.png")
 ```
 
@@ -198,18 +200,18 @@ We use cross validation to improve the prediction accuracy. The tuning process i
 We found the cross validation (CV) scores as follows. Then we create a reverse elbow plot to find the best number cross validation folds. 
 
 
-```{r cv-plot, out.width="80%", fig.cap="Cross Validation Accuracy vs Fold Iterations"}
+```{r cv-plot, out.width="80%", fig.align="center" , fig.cap="Cross Validation Accuracy vs Fold Iterations"}
 knitr::include_graphics("../result/cv_plot.png")
 ```
 
 
 
-According to \@ref(fig:cv-plot) we can see that the best CV fold value should be 4, which corresponds to the maximum CV accuracy.
+According to figure \@ref(fig:cv-plot) we can see that the best CV fold value should be 4, which corresponds to the maximum CV accuracy.
 
 #### Discussion of the Model Results
 
 
-Although we choose 4 as the best cv fold value, it still shows a extremely low prediction score of approximately 0.004 (as seen in \@ref(fig:cv-plot)) on the testing sets ($R^2$ value is nearly 0). This shows there is very weak correlation between our predictors and response variables. Meaning, there is little to no relationship between economic family investment income (EFINVA), and the family size (EFSIZE), and the economic family's major income earner (EFMJIE).
+Although we choose 4 as the best cv fold value, it still shows a extremely low prediction score of approximately 0.004 (as seen in figure \@ref(fig:cv-plot)) on the testing sets ($R^2$ value is nearly 0). This shows there is very weak correlation between our predictors and response variables. Meaning, there is little to no relationship between economic family investment income (EFINVA), and the family size (EFSIZE), and the economic family's major income earner (EFMJIE).
 
 ### Second Model: KNN-Classification
 
@@ -221,39 +223,45 @@ The same splitting methodology has been applied here as in the regression model.
 Next, we tune the model to find the best value of K neighbors.
 
 
-```{r elbow-plot, out.width="80%", fig.cap="Elbow plot of K-values vs CV accuracy"}
+```{r elbow-plot, out.width="80%", fig.align="center", fig.cap="Elbow plot of K-values vs CV accuracy"}
 knitr::include_graphics("../result/elbow_plot.png")
 ```
 
 
 The reverse elbow plot \@ref(fig:elbow-plot) shows an optimal K value of 26. Even though a higher CV score is obtained at K=16, this is likely just due to chance. K=26 is a better optimal value since the CV score remains relatively stable past K=26. It shows a mean cross validation score of 55.7% which is a very good estimate for our testing score (see below). 
 
+
+```{python final-score}
+finalscore = pickle.load("../result/final_score")
+```
+
+
 #### Testing Score
 
-The model shows an accuracy of `python pickle.load("../result/final_score")` percent on the testing data, which is very slightly better than arbitrary guessing.
+The model shows an accuracy of `py$finalscore` percent on the testing data, which is very slightly better than arbitrary guessing.
 
 #### Classification Results Visualization
 
-```{r conf-mat, out.width="80%", fig.cap="Confusion Matrix"}
+```{r conf-mat, out.width="80%", fig.align="center", fig.cap="Confusion Matrix"}
 knitr::include_graphics("../result/conf_mat.png")
 ```
 
 
 #### Discussion of Plot Results
 
-```{r plot-1, out.width="80%"}
+```{r plot-1, fig.align="center", out.width="80%", fig.cap="Plot 1"}
 knitr::include_graphics("../result/plot1.png")
 ```
 
-```{r plot-2, out.width="80%"}
+```{r plot-2, fig.align="center", out.width="80%", fig.cap="Plot 2"}
 knitr::include_graphics("../result/plot2.png")
 ```
 
-```{r plot-3, out.width="80%"}
+```{r plot-3, fig.align="center", out.width="80%", fig.cap="Plot 3"}
 knitr::include_graphics("../result/plot3.png")
 ```
 
-```{r plot-4, out.width="80%"}
+```{r plot-4, fig.align="center", out.width="80%", fig.cap="Plot 4"}
 knitr::include_graphics("../result/plot4.png")
 ```
 
