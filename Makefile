@@ -8,15 +8,16 @@
 # make all
 
 
-all : data/raw/raw_data.csv
+all : data/raw/raw_data.csv data/processed/preprocessing
 
 # all: results/final_model.rds results/accuracy_vs_k.png results/predictor_distributions_across_class.png results/final_model_quality.rds doc/breast_cancer_predict_report.md
 
 # download data
 data/raw/raw_data.csv : 
 	Rscript src/download_dataset_script.r --url="https://onedrive.live.com/download?cid=3186CCDB0C6495E0&resid=3186CCDB0C6495E0%2157273&authkey=AK4_vAlM4AFx7_M" --out_dir="data/raw/raw_data.csv"
- # pre-process data
-#data/processed/X_train.csv data/processed/Y_train.csv data/processed/<!!!> data/processed/<!!!> : src/read_process_script.py
+# pre-process data
+data/processed/preprocessing: src/read_process_script.py
+	Python src/read_process_script.py --read_path="data/raw/raw_data.csv" --processed_path="data/processed/" --train_path="data/processed/" --test_path="data/processed/"
 
 # # exploratory data analysis - Histograms
 # results/predictor_distributions_across_class.png : src/eda_wisc.r data/processed/training.feather
@@ -38,7 +39,8 @@ data/raw/raw_data.csv :
 
 
 clean: 
-	rm -rf data
+	rm -rf data/raw/*
+	rm -rf data/processed/*
 	rm -rf results
 	rm -rf doc/Analysis_of_Investment_Outcome_report.md doc/Analysis_of_Investment_Outcome_report.html
 
