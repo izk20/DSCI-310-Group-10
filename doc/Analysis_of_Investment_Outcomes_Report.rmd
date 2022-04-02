@@ -48,6 +48,7 @@ from src.analysis.alpha_tuning import ridge_alpha_tuning
 from src.analysis.KNN_tuning import KNN_tuning
 from src.analysis import inv_outcome_plot
 from src.analysis.split_drop import split_drop
+import pickle
 ```
 
 ## Summary
@@ -111,19 +112,6 @@ Description of the Relevant Variables:
     * 06: Retirement pensions
     * 07: Other income
     
-    
-# Premliminary Analysis
-
-### Loading Data
-
-```{python data, out.width="20"}
-data = pd.read_csv('../data/raw/raw_data.csv')
-first_5 = data.head()
-```
- 
-``` {r data-caption}
-knitr::kable(py$first_5, caption = "The CIS Dataset (first 5)")
-```
 
 ### Cleaning and Wrangling
 
@@ -141,7 +129,7 @@ The data is reduced to some specific features and targets of interest before EDA
 - The ATINC column contains the value 99999996 for observations that were skipped for the information for valid reasons. Therefore, these observations should be removed. 
 
 
-```{r fre-dist-plots, out.width="110", fig.align="center", fig.cap="Frequency Distributions of the chosen variables"}
+```{r fre-dist-plots, out.width="100%", fig.align="center", fig.cap="Frequency Distributions of the chosen variables"}
 knitr::include_graphics("../result/histograms.png")
 ```
 
@@ -194,9 +182,6 @@ We build a transformer to do ordinal encoding. As for better machine readability
 We use cross validation to improve the prediction accuracy. The tuning process is to find the best alpha value, which is then used to create the model.   
 
 
-##### Table 5: Cross validation scores for ridge model
-
-
 We found the cross validation (CV) scores as follows. Then we create a reverse elbow plot to find the best number cross validation folds. 
 
 
@@ -232,13 +217,14 @@ The reverse elbow plot \@ref(fig:elbow-plot) shows an optimal K value of 26. Eve
 
 
 ```{python final-score}
-finalscore = pickle.load("../result/final_score")
+with open("../result/final_score", "rb") as f:
+  finalscore = pickle.load(f)
 ```
 
 
 #### Testing Score
 
-The model shows an accuracy of `py$finalscore` percent on the testing data, which is very slightly better than arbitrary guessing.
+The model shows an accuracy of `r py$finalscore` percent on the testing data, which is very slightly better than arbitrary guessing.
 
 #### Classification Results Visualization
 
