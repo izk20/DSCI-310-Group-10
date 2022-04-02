@@ -18,6 +18,7 @@ from analysis.format_histograms import format_histograms
 
 opt = docopt(__doc__)
 
+
 def main(processed_data_path, output_file):
     
     reduced_data = pd.read_pickle(processed_data_path)
