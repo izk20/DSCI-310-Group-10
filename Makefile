@@ -8,12 +8,12 @@
 # make all
 
 
-all : data/raw/raw_data.csv data/processed/preprocessing results/hyperparamter_opti results/simple_linear_regression result/eda_figures result/knn_classification result/final_plot1 result/final_plot2 result/final_plot3 result/final_plot4 
+all : data/raw/raw_data.csv data/processed/preprocessing results/hyperparamter_opti results/simple_linear_regression result/eda_figures result/knn_classification result/final_plot1 result/final_plot2 result/final_plot3 result/final_plot4 doc/Analysis_of_Investment_Outcome_report.md
 
 # all: results/final_model.rds results/accuracy_vs_k.png results/predictor_distributions_across_class.png results/final_model_quality.rds doc/breast_cancer_predict_report.md
 
 # download data
-data/raw/raw_data.csv : 
+data/raw/raw_data.csv :
 	Rscript src/download_dataset_script.r --url="https://onedrive.live.com/download?cid=3186CCDB0C6495E0&resid=3186CCDB0C6495E0%2157273&authkey=AK4_vAlM4AFx7_M" --out_dir="data/raw/raw_data.csv"
 # pre-process data
 data/processed/preprocessing: src/read_process_script.py
@@ -59,9 +59,11 @@ result/final_plot4: src/plot-stacked-chart.py
 # 	src/<!!!>.py data/processed/
 
 # # render report
-# doc/Analysis_of_Investment_Outcome_report.md : doc/breast_cancer_predict_report.Rmd doc/breast_cancer_refs.bib
+#doc/Analysis_of_Investment_Outcome_report.md: doc/breast_cancer_predict_report.Rmd
 # 	Rscript -e "rmarkdown::render('doc/breast_cancer_predict_report.Rmd')"
 
+doc/Analysis_of_Investment_Outcome_report.md: doc/Analysis_of_Investment_Outcomes_Report.rmd
+	Rscript -e "rmarkdown::render('doc/Analysis_of_Investment_Outcomes_Report.rmd')"
 
 clean: 
 	rm -rf data/raw/*
