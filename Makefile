@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 # This driver script completes the graphical and textual analysis 
 # for the Analysis of Investment Outcome Predictor Report.
 # author: Nikko Dumrique, Mahdi Heydar, Ahmed Rizk, Harry Zhang
@@ -69,3 +70,5 @@ clean:
 	rm -rf result/*
 	rm -rf doc/Analysis_of_Investment_Outcome_report.md doc/Analysis_of_Investment_Outcome_report.html
 
+=======
+>>>>>>> main
