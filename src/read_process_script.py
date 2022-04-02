@@ -48,23 +48,14 @@ def write_to_csv(data, path, filename):
     
 
 def main(read_path, processed_path, train_path, test_path):
-    print("1")
     reduced_data = read_trim(read_path)
-    print("2")
     processed = process(reduced_data, processed_path)
-    print("3")
     X_train, Y_train, X_test, Y_test = train_test_drop(processed, "EFINVA")
-    print("4")
     write_to_csv(X_train, train_path,"X_train.csv")
-    print("5")
     write_to_csv(Y_train, train_path, "Y_train.csv")
-    print("6")
     write_to_csv(X_test, test_path, "X_test.csv")
-    print("7")
     write_to_csv(Y_test, test_path ,"Y_test.csv")
-    print("8")
     write_to_csv(processed, processed_path, "processed.csv")
-    print("9")
     
     
 main(opt["--read_path"], opt["--processed_path"], opt["--train_path"], opt["--test_path"])

@@ -14,9 +14,9 @@ all : data/raw/raw_data.csv
 
 # download data
 data/raw/raw_data.csv : 
-	Rscript src/download_dataset_script.r --url="https://onedrive.live.com/download?cid=3186CCDB0C6495E0&resid=3186CCDB0C6495E0%2157273&authkey=AK4_vAlM4AFx7_M" --out_dir=data/raw/raw_data.csv
-# # pre-process data 
-# data/processed/<!!!> data/processed/<!!!> : src/<!!!>.py
+	Rscript src/download_dataset_script.r --url="https://onedrive.live.com/download?cid=3186CCDB0C6495E0&resid=3186CCDB0C6495E0%2157273&authkey=AK4_vAlM4AFx7_M" --out_dir="data/raw/raw_data.csv"
+ # pre-process data
+#data/processed/X_train.csv data/processed/Y_train.csv data/processed/<!!!> data/processed/<!!!> : src/read_process_script.py
 
 # # exploratory data analysis - Histograms
 # results/predictor_distributions_across_class.png : src/eda_wisc.r data/processed/training.feather
