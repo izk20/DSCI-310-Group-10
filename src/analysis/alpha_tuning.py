@@ -32,7 +32,7 @@ def ridge_alpha_tuning(alpha, processor, trainx, trainy, cv=10):
     if not isinstance(trainx, pd.DataFrame):
         raise TypeError("train_x should be data frame")
     if not isinstance(trainy, pd.Series):
-        raise TypeError("train_y should be data frame")
+        raise TypeError("train_y should be data series")
     if not isinstance(cv,int):
         raise TypeError("cv should be an integer")
     ridge_cv_pipe = make_pipeline(processor, RidgeCV(alphas=alpha, cv=cv))

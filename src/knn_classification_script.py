@@ -30,9 +30,9 @@ from docopt import docopt
 
 opt = docopt(__doc__)
 
-
+np.random.seed(1)
 def create_categ(processed, new_var, var):
-    processed = pd.read_csv(processed)
+    processed = pd.read_pickle(processed)
     processed[new_var] = np.array(processed[var]) > processed[var].median()
     return processed
 
@@ -43,7 +43,7 @@ def train_test_drop(processed, drop_col):
 
 
 def create_preprocessor(binary, category):
-    X_train = pd.read_csv("../data/Training/X_train.csv")
+    X_train = pd.read_pickle("data/processed/X_train.pkl")
     binary_fea = [binary]
     cate_fea = [category]
     cate_trans = make_pipeline(OrdinalEncoder(categories = [[1, 2, 3, 4, 5, 6, 7]], dtype=int))
@@ -77,6 +77,7 @@ def create_pipeline(train1, train2, test1, test2, preprocessor):
     pipe_final = make_pipeline(preprocessor, KNeighborsClassifier(n_neighbors=26))
     pipe_final.fit(train1, train2)
     pipe_final.score(test1, test2)
+    return pipe_final
     
     
 def conf_mat(pipeline, data1, data2, path, filename):
@@ -88,13 +89,19 @@ def main(processed, out_dir):
 
     processed = create_categ(processed, "EFINVA_Made_Money", "EFINVA")
     train_2, test_2, X_train_2, Y_train_2, X_test_2, Y_test_2 = train_test_drop(processed, "EFINVA_Made_Money")
+    with open("data/processed/test_2", "wb") as f:
+        pickle.dump(test_2, f)
+    with open("data/processed/X_test_2", "wb") as f:
+        pickle.dump(X_test_2, f)
     preprocessor_x = create_preprocessor("EFMJIE", "EFSIZE")
     results_df = tune_model(X_train_2, Y_train_2, preprocessor_x)
     #to write 
-    with open("results_df", "wb") as f:
+    with open("result/results_df", "wb") as f:
         pickle.dump(results_df, f) 
-    # elbow_plot(results_df, out_dir, "elbow_plot.png")
+    elbow_plot(results_df, out_dir, "elbow_plot.png")
     pipe_final = create_pipeline(X_train_2, Y_train_2, X_test_2, Y_test_2, preprocessor_x)
+    with open("data/processed/pipe_final", "wb") as f:
+        pickle.dump(pipe_final, f)
     conf_mat(pipe_final, X_test_2, Y_test_2, out_dir, "conf_mat.png")
     
     
