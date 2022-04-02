@@ -10,6 +10,8 @@ Options:
 """
 
 from docopt import docopt
+import seaborn as sns
+import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from analysis.format_histograms import format_histograms
@@ -40,14 +42,15 @@ def main(processed_data_path, output_file):
     
     
     histograms = format_histograms(reduced_data, texts)
-    histograms.tightlayout()
-    histograms.savefig(output_file + "/histograms.png")
+    hists = histograms[0]
+    hists.get_figure().savefig(output_file + "histograms.png", dpi=50)
     
+   
     plt.figure(figsize=(10,10))
     correlations = reduced_data.iloc[:,[1,3,5]].corr()
 
     corr_mat = sns.heatmap(correlations, cmap=plt.cm.Blues, annot=True)
-    corr_mat.savefig(output_file + "/corr_mat.png")
+    plt.savefig(output_file + "corr_mat.png", dpi=100)
         
     
     
