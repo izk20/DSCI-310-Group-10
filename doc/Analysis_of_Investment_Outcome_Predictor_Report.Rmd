@@ -14,6 +14,34 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r r_load_packages, include=FALSE}
+library(reticulate)
+```
+
+
+```{python py_load_packages, include=TRUE}
+import numpy as np
+import pandas as pd
+import sklearn as sk
+from sklearn.pipeline import Pipeline, make_pipeline
+from sklearn.preprocessing import StandardScaler, OneHotEncoder,OrdinalEncoder
+from sklearn.compose import ColumnTransformer, make_column_transformer
+from sklearn.model_selection import train_test_split
+from sklearn.model_selection import RandomizedSearchCV, cross_validate
+from sklearn.metrics import plot_confusion_matrix
+from sklearn.linear_model import Ridge, RidgeCV
+import seaborn as sns
+import matplotlib.pyplot as plt
+from sklearn.neighbors import KNeighborsClassifier
+import sys
+sys.path.append('..')
+from src.analysis.format_histograms import format_histograms
+from src.analysis.alpha_tuning import ridge_alpha_tuning
+from src.analysis.KNN_tuning import KNN_tuning
+from src.analysis import inv_outcome_plot
+from src.analysis.split_drop import split_drop
+```
+
 ## Summary
 The goal of this analysis is to investigate the economic family's investment income, where the true class indicates money was made on investments, and the false class indicates breaking even or money lost. The report examines its relationship with family size, the economic family's major income earner, the income after tax, and other related variables to determine whether or not its possible to predict it using those variables or a subset of them. The data is obtained from Statistics Canada's 2017 Canadian Income Survey [1]. 
 
