@@ -55,8 +55,3 @@ if __name__ == "__main__":
     main(opt["--processed_data_path"], opt["--output_file"])
 
     
-    
-plt.figure(figsize=(10,10))
-correlations = reduced_data.iloc[:,[1,3,5]].corr()
-
-sns.heatmap(correlations, cmap=plt.cm.Blues, annot=True)
