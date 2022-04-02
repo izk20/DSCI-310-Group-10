@@ -100,6 +100,9 @@ def main(processed, out_dir):
         pickle.dump(results_df, f) 
     elbow_plot(results_df, out_dir, "elbow_plot.png")
     pipe_final = create_pipeline(X_train_2, Y_train_2, X_test_2, Y_test_2, preprocessor_x)
+    final_score= pipe_final.score(X_test_2, Y_test_2)
+    with open("result/final_score", "wb") as f:
+        pickle.dump(final_score, f)
     with open("data/processed/pipe_final", "wb") as f:
         pickle.dump(pipe_final, f)
     conf_mat(pipe_final, X_test_2, Y_test_2, out_dir, "conf_mat.png")
