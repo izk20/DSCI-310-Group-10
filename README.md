@@ -33,14 +33,13 @@ Steps:
     -**```git clone https://github.com/DSCI-310/DSCI-310-Group-10.git```**
 * Using the command line/terminal, navigate to the repository directory
 * Type the following:
-* navigate to the root directory of the projeect
-    - **```docker run -d -p 8787:8787 -v $(pwd):/home/rstudio -e PASSWORD=pass mahdiheydar/dsci-310-10-project```**
-* This will enter the container, type the following once inside the container
-* Open a browser and type localhost:8787
-* use the following information to enter the container
+* Navigate to the root directory of the project
+    - **```docker run -d -p 8787:8787 -v /$(pwd):/home/rstudio -e PASSWORD=pass mahdiheydar/dsci-310-10-project```**
+* Once this is finished running, open a browser and type localhost:8787
+* Use the following information to enter the container
       * Username: rstudio
       * Password: pass
-* After this make a terminal and run as follows:
+* After this, rstudio will open. Open a terminal and type the following commands:
    - **```make clean```**
    - **```make all```**
 
