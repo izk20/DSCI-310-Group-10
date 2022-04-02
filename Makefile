@@ -8,7 +8,7 @@
 # make all
 
 
-all : data/raw/raw_data.csv data/processed/preprocessing
+all : data/raw/raw_data.csv data/processed/preprocessing results/hyperparamter_opti
 
 # all: results/final_model.rds results/accuracy_vs_k.png results/predictor_distributions_across_class.png results/final_model_quality.rds doc/breast_cancer_predict_report.md
 
@@ -23,9 +23,9 @@ data/processed/preprocessing: src/read_process_script.py
 # results/predictor_distributions_across_class.png : src/eda_wisc.r data/processed/training.feather
 # 	Rscript src/eda_wisc.r --train=data/processed/training.feather --out_dir=results
 
-# # Hyperparameter tuning (here, find K for k-nn using 30 fold cv with Cohen's Kappa)
-# results/<!!!>.png results/<!!!>.png : src/<!!!>.py data/processed/
-# 	src/<!!!>.py data/processed/
+ # Hyperparameter tuning (here, find K for k-nn using 30 fold cv with Cohen's Kappa)
+results/hyperparamter_opti: src/hyperparameter_optimization_new.py
+	Python src/hyperparameter_optimization_new.py --xtrainpath="data/processed/X_train.pkl" --ytrainpath="data/processed/Y_train.pkl" --variables="EFSIZE,EFMJIE" --out_dir="result/"
 
 # # Visualized results
 # results/<!!!>.png : src/<!!!>.py data/processed/

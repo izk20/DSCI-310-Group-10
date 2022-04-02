@@ -2,13 +2,13 @@
 # date: 2022-03-25
 
 """
-Usage: src/read_process_script.py --xtrainpath=<xtrainpath> --ytrainpath=<ytrainpath> --variables=sss<variables>
-python src/read_process_script.py --xtrainpath='' --ytrainpath=<ytrainpath> --variables=<variables>
+Usage: src/read_process_script.py --xtrainpath=<xtrainpath> --ytrainpath=<ytrainpath> --variables=sss<variables> --out_dir=<out_dir>
 
 Options:
 --xtrainpath=<xtrainpath>:    csv file previously saved in the previous script the training data for the x-axis of ridge regression
 --ytrainpath=<ytrainpath>:     csv file previously saved int the previous script the training data for the y-axis of ridge regression
 --variables=<variables>:  A list of variables which contains both binary and categories feature of processor.
+--out_dir=<out_dir>:       The directory for all the pickles store iin
 """
 
 import pandas as pd
@@ -31,27 +31,29 @@ def make_processor(binary_fea, cate_fea):
     )
     return preprocessor
 
-def pickle_save(name, variable):
-    with open(name,"wb") as f:
-        pickle.dump(variable, f)
+# def pickle_save(name, variable):
+#     with open(name,"wb") as f:
+#         pickle.dump(variable, f)
 
 
-def main(xtrainpath, ytrainpath, variables):
+def main(xtrainpath, ytrainpath, variables,out_dir):
     variables = [x for x in variables.split(',')]
-    ytrain = pd.read_csv(ytrainpath)
-    xtrain = pd.read_csv(xtrainpath)
-    ytrain = ytrain.squeeze()
+    ytrain = pd.read_pickle(ytrainpath)
+    xtrain = pd.read_pickle(xtrainpath)
+    # ytrain = ytrain_df.squeeze()
+    # raise ImportError(type(ytrain))
+
     preprocessor = make_processor([variables[0]],[variables[1]])
     train_processed = preprocessor.fit_transform(xtrain)
     alphas = list(10.0 ** np.arange(-2, 5, 1))
     best_alpha = ridge_alpha_tuning(alphas, preprocessor, xtrain, ytrain)
-    with open("best_alpha","wb") as f:
+    with open(out_dir+"best_alpha","wb") as f:
         pickle.dump(best_alpha, f)
-    with open("trained_preprocessor","wb") as f:
+    with open(out_dir+"trained_preprocessor","wb") as f:
         pickle.dump(train_processed, f)
-    with open("preprocessor", "wb") as f:
+    with open(out_dir+"preprocessor", "wb") as f:
         pickle.dump(preprocessor, f)
 
 
 if __name__ == "__main__":
-    main(opt["--xtrainpath"], opt["--ytrainpath"],opt["--variables"])
+    main(opt["--xtrainpath"], opt["--ytrainpath"],opt["--variables"], opt["--out_dir"])
