@@ -8,7 +8,7 @@
 # make all
 
 
-all : data/raw/raw_data.csv data/processed/preprocessing results/hyperparamter_opti results/simple_linear_regression result/knn_classification result/final_plot1 result/final_plot2 result/final_plot3 result/final_plot4 result/eda_figures
+all : data/raw/raw_data.csv data/processed/preprocessing results/hyperparamter_opti results/simple_linear_regression result/eda_figures result/knn_classification result/final_plot1 result/final_plot2 result/final_plot3 result/final_plot4 
 
 # all: results/final_model.rds results/accuracy_vs_k.png results/predictor_distributions_across_class.png results/final_model_quality.rds doc/breast_cancer_predict_report.md
 
