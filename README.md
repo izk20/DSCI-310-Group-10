@@ -34,7 +34,7 @@ Steps:
 * Using the command line/terminal, navigate to the repository directory
 * Type the following:
 * navigate to the root directory of the projeect
-    - **```docker run -d -p 8787:8787 -v $(pwd):/home/rstudio -e PASSWORD=pass dsci310_proj```**
+    - **```docker run -d -p 8787:8787 -v $(pwd):/home/rstudio -e PASSWORD=pass mahdiheydar/dsci-310-10-project```**
 * This will enter the container, type the following once inside the container
 * Open a browser and type localhost:8787
 * use the following information to enter the container
