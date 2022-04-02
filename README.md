@@ -30,20 +30,30 @@ Steps:
 * Install Docker if you have not already done so. This is hardware specific and is specified here: https://docs.docker.com/get-docker/
 * Clone this repository to your local machine:
 
-    -**```git clone git@github.com:DSCI-310/DSCI-310-Group-10.git```**
+    -**```git clone https://github.com/DSCI-310/DSCI-310-Group-10.git```**
 * Using the command line/terminal, navigate to the repository directory
 * Type the following:
-    - **```docker run -it --rm -p 8888:8888 -v /$(pwd):/home/investment-outcome-knn mahdiheydar/dsci-310-10-project```**
+* navigate to the root directory of the projeect
+    - **```docker run -d -p 8787:8787 -v $(pwd):/home/rstudio -e PASSWORD=pass dsci310_proj```**
 * This will enter the container, type the following once inside the container
-    - **```jupyter lab --ip 0.0.0.0 --port 8888 --no-browser --allow-root```**
-* Using the links provided, open Jupyter Lab and navigate to the home folder using the directory on the left
-* find the investment-outcome-knn directory where the files for this project are located
+* Open a browser and type localhost:8787
+* use the following information to enter the container
+      * Username: rstudio
+      * Password: pass
+* After this make a terminal and run as follows:
+   - **```make clean```**
+   - **```make all```**
+
 
 ### Dependencies
 
 * Python 3.9.7 with packages:
-  - pandas=1.3.4 
+  - numpy==1.22.3
+  - pandas==1.4.1
+  - jupyterlab==3.2.9
+  - docopt==0.6.2
+  - pytest==7.0.1
   - scikit-learn=0.24.2 
-  - seaborn=0.11.2 
-  - matplotlib=3.4.3 
-  - pytest=4.0.1
+  - seaborn==0.11.2
+  - matplotlib==3.5.1
+
