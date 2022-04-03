@@ -8,7 +8,7 @@
 # make all
 
 
-all : data/raw/raw_data.csv data/processed/preprocessing results/hyperparamter_opti results/simple_linear_regression result/eda_figures result/knn_classification result/final_plot1 result/final_plot2 result/final_plot3 result/final_plot4 doc/Analysis_of_Investment_Outcomes_Report.pdf
+all : data/raw/raw_data.csv data/processed/preprocessing results/hyperparamter_opti results/simple_linear_regression result/eda_figures result/knn_classification result/final_plot1 result/final_plot2 result/final_plot3 result/final_plot4 doc/Analysis_of_Investment_Outcomes_Report.pdf doc/Analysis_of_Investment_Outcomes_Report.html
 
 # all: results/final_model.rds results/accuracy_vs_k.png results/predictor_distributions_across_class.png results/final_model_quality.rds doc/breast_cancer_predict_report.md
 
@@ -59,12 +59,12 @@ result/final_plot4: src/plot-stacked-chart.py
 # 	src/<!!!>.py data/processed/
 
 # # render report
-doc/Analysis_of_Investment_Outcomes_Report.pdf : doc/Analysis_of_Investment_Outcomes_Report.rmd doc/references.bib
-	Rscript -e "rmarkdown::render('doc/Analysis_of_Investment_Outcomes_Report.rmd')"
-
+doc/Analysis_of_Investment_Outcomes_Report.pdf doc/Analysis_of_Investment_Outcomes_Report.html : doc/Analysis_of_Investment_Outcomes_Report.rmd doc/references.bib
+	Rscript -e "rmarkdown::render('doc/Analysis_of_Investment_Outcomes_Report.rmd', c('bookdown::html_document2', 'bookdown::pdf_document2'))"
 
 clean: 
 	rm -rf data/raw/*
 	rm -rf data/processed/*
 	rm -rf result/*
 	rm -rf doc/Analysis_of_Investment_Outcomes_Report.pdf
+	rm -rf doc/Analysis_of_Investment_Outcomes_Report.html
