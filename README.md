@@ -42,6 +42,7 @@ Steps:
 * After this, rstudio will open. Open a terminal and type the following commands:
    - **```make clean```**
    - **```make all```**
+* Navigate to the doc folder using the directory to find the Analysis_of_Investment_Outcomes.pdf and Analysis_of_Investment_Outcomes.html
 
 
 ### Dependencies
