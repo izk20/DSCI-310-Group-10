@@ -5,6 +5,7 @@ on:
       - main
     paths: 
       - 'Dockerfile'
+      - 'requirements.txt'
 jobs:
   build:
     runs-on: ubuntu-latest
