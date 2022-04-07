@@ -7,10 +7,10 @@ COPY requirements.txt requirements.txt
 
 RUN pip3 install -r requirements.txt
 
-RUN Rscript -e "install.packages('reticulate')"
+RUN R -e "install.packages('reticulate')"
 
-RUN Rscript -e "install.packages('knitr', dependencies = TRUE)"
+RUN R -e "install.packages('knitr', dependencies = TRUE)"
 
-RUN Rscript -e "install.packages('bookdown')"
+RUN R -e "install.packages('bookdown')"
 
-RUN Rscript -e "tinytex::install_tinytex()"
+RUN R -e "install.packages('rmarkdown')"
