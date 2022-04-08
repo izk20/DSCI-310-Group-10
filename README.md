@@ -37,8 +37,8 @@ Steps:
     - **```docker run -d -p 8787:8787 -v /$(pwd):/home/rstudio -e PASSWORD=pass mahdiheydar/dsci-310-10-image```**
 * Once this is finished running, open a browser and type localhost:8787
 * Use the following information to enter the container
-      * Username: rstudio
-      * Password: pass
+       **Username: rstudio**
+       **Password: pass**
 * After this, rstudio will open. Open a terminal and type the following commands:
    - **```make clean```**
    - **```make all```**
