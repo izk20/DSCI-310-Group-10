@@ -5,7 +5,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends apt-utils build
 
 RUN R -e "install.packages('reticulate')"
 
-RUN python3.9 -m pip install "git+https://github.com/DSCI-310/group_10_package"
+RUN python3.9 -m pip install group10pack
 
 #RUN R -e "library(reticulate)" \
 #         "use_python('/usr/bin/python3.9')"
