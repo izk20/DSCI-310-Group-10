@@ -3,11 +3,13 @@ FROM rocker/rstudio:4.1.3
 
 RUN apt-get update && apt-get install -y --no-install-recommends apt-utils build-essential r-base python3.9 python3-pip python3-setuptools
 
-ENV PATH=/usr/bin/python3.9
+RUN \
+   echo 'alias python="/usr/bin/python3.9"' >> /root/.bashrc && \
+   source /root/.bashrc
 
 COPY requirements.txt requirements.txt
 
-RUN pip install -r requirements.txt
+RUN pip3 install -r requirements.txt
 
 RUN pip install group10pack
 
