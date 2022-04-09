@@ -9,8 +9,7 @@ RUN ln -s /usr/bin/python3.9 /usr/bin/python
 
 RUN python --version
 
-RUN cd /usr/bin/ &&
-    ls -l /usr/bin | grep '../python3.8' | awk '{print $9}' | tr -d @ | xargs rm
+RUN cd /usr/bin/ && ls -l /usr/bin | grep '../python3.8' | awk '{print $9}' | tr -d @ | xargs rm
 
 RUN pip install "git+https://github.com/DSCI-310/group_10_package"
 
