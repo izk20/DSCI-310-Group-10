@@ -6,8 +6,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends build-essential
 
 COPY requirements.txt requirements.txt
 
-RUN pip install group10pack
-
 RUN pip3 install -r requirements.txt
 
 RUN R -e "install.packages('reticulate')"
