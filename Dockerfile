@@ -5,9 +5,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends apt-utils build
 
 RUN R -e "install.packages('reticulate')"
 
-RUN R -e "library(reticulate)"
+RUN R -e "library(reticulate)" \
+         "use_python('/usr/bin/python3.9')"
 
-RUN R -e "use_python('/usr/bin/python3.9')"
+# RUN R -e use_python('/usr/bin/python3.9')
 
 RUN R -e "install.packages('knitr', dependencies = TRUE)"
 
