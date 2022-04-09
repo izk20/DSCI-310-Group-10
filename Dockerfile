@@ -3,7 +3,7 @@ FROM rocker/rstudio:4.1.3
 
 RUN apt-get update && apt-get install -y --no-install-recommends apt-utils build-essential r-base python3.9 python3-pip python3-setuptools
 
-RUN pip install --upgrade pip && pip install group10pack
+RUN pip install --upgrade pip && pip install "git+https://github.com/DSCI-310/group_10_package"
 
 RUN R -e "install.packages('reticulate')"
 
