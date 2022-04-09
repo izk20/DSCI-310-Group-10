@@ -1,9 +1,8 @@
 # Group-10 Docker Image Build
 FROM rocker/rstudio:4.1.3
 
-RUN apt-get update && apt-get install -y --no-install-recommends build-essential r-base 
+RUN apt-get update && apt-get install -y --no-install-recommends build-essential r-base ~python3.9 python3-pip python3-setuptools
 
-RUN apt-get install -y build-essential python3.9.12 python3-pip python3-setuptools
 
 COPY requirements.txt requirements.txt
 
