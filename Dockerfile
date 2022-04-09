@@ -5,11 +5,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends apt-utils build
 
 RUN ln -s /usr/bin/python3.9 /usr/bin/python
 
+RUN python3 -m pip install group10pack
+
 COPY requirements.txt requirements.txt
 
 RUN pip3 install -r requirements.txt
 
-RUN pip install group10pack
 
 RUN R -e "install.packages('reticulate')"
 
