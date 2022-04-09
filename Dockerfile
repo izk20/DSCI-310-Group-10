@@ -15,9 +15,9 @@ RUN R -e "install.packages('bookdown')"
 
 RUN R -e "install.packages('rmarkdown')"
 
-RUN ln -s /usr/bin/python3.9 /usr/bin/python
+# RUN ln -s /usr/bin/python3.9 /usr/bin/python
 
-RUN python3 -m pip install group10pack
+RUN pip install group10pack
 
 COPY requirements.txt requirements.txt
 
