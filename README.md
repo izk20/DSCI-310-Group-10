@@ -56,7 +56,7 @@ Steps:
   - scikit-learn=0.24.2 
   - seaborn==0.11.2
   - matplotlib==3.5.1
-  - group10pack==0.1.5
+  - group10pack==0.1.6
 
 ### License
 This project is licensed under the MIT License and [Creative Commons Attribution-NonCommerical-NoDerivatives 4.0 International License](https://creativecommons.org/licenses/by-nc-nd/4.0/)
