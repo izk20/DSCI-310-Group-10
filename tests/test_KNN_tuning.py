@@ -8,23 +8,26 @@ from sklearn.preprocessing import StandardScaler
 import numpy as np
 from src.analysis.KNN_tuning import KNN_tuning
 
-def test_KNN_fullfuc():
+
+@pytest.fixture
+def toy_dataset():
+    return pd.DataFrame({
+        "x": [12, 23, 34, 45, 65, 56, 12, 23, 34, 45, 65, 56],
+        "x2": [2, 3, 4, 5, 6, 7, 2, 3, 4, 5, 6, 7],
+        "x3": [2, 3, 4, 5, 6, 7, 2, 3, 4, 5, 6, 7],
+        "x34": [2, 3, 4, 5, 6, 7, 4, 5, 6, 7, 8, 9],
+        "x35": [2, 3, 4, 5, 6, 7, 4, 5, 6, 7, 8, 9],
+        "y": [1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2]
+        })
+def test_KNN_fullfuc(toy_dataset):
     results_dict = {
         "n_neighbours": [],
         "mean_train_score": [],
         "mean_cv_score": []
     }
     param = {"n_neighbours": [1,2,3]}
-    dat = pd.DataFrame({
-        "x": [12,23,34,45,65,56,12,23,34,45,65,56],
-        "x2": [2, 3, 4, 5, 6, 7,2, 3, 4, 5, 6, 7],
-        "x3": [2, 3, 4, 5, 6, 7, 2, 3, 4, 5, 6, 7],
-        "x34": [2, 3, 4, 5, 6, 7,4,5,6,7,8,9],
-        "x35": [2, 3, 4, 5, 6, 7, 4, 5, 6, 7, 8, 9],
-        "y": [1,2,1,2,1,2,1,2,1,2,1,2]
 
-    })
-    train, test = train_test_split(dat, test_size=.2, random_state=123)
+    train, test = train_test_split(toy_dataset, test_size=.2, random_state=123)
     train_x,train_y = train.drop(columns="y"), train["y"]
     for k in param["n_neighbours"]:
         knn = make_pipeline(StandardScaler(), KNeighborsClassifier(n_neighbors=k, n_jobs=-1))
@@ -36,44 +39,29 @@ def test_KNN_fullfuc():
     df2 = KNN_tuning(StandardScaler(),train_x,train_y,param)
     assert_frame_equal(data, df2, check_dtype=False)
 
-def test_KNN_trainx():
+def test_KNN_trainx(toy_dataset):
     results_dict = {
         "n_neighbours": [],
         "mean_train_score": [],
         "mean_cv_score": []
     }
     param = {"n_neighbours": [1, 2, 3]}
-    dat = pd.DataFrame({
-        "x": [12, 23, 34, 45, 65, 56, 12, 23, 34, 45, 65, 56],
-        "x2": [2, 3, 4, 5, 6, 7, 2, 3, 4, 5, 6, 7],
-        "x3": [2, 3, 4, 5, 6, 7, 2, 3, 4, 5, 6, 7],
-        "x34": [2, 3, 4, 5, 6, 7, 4, 5, 6, 7, 8, 9],
-        "x35": [2, 3, 4, 5, 6, 7, 4, 5, 6, 7, 8, 9],
-        "y": [1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2]
-    })
-    train, test = train_test_split(dat, test_size=.2, random_state=123)
+
+    train, test = train_test_split(toy_dataset, test_size=.2, random_state=123)
     train_x, train_y = train.drop(columns="y"), train["y"]
     train_x = "teo"
     with pytest.raises(TypeError) as e_info:
         KNN_tuning(StandardScaler(), train_x, train_y, param)
     assert "train_x should be data frame" in str(e_info.value)
 
-def test_KNN_trainy():
+def test_KNN_trainy(toy_dataset):
     results_dict = {
         "n_neighbours": [],
         "mean_train_score": [],
         "mean_cv_score": []
     }
     param = {"n_neighbours": [1, 2, 3]}
-    dat = pd.DataFrame({
-        "x": [12, 23, 34, 45, 65, 56, 12, 23, 34, 45, 65, 56],
-        "x2": [2, 3, 4, 5, 6, 7, 2, 3, 4, 5, 6, 7],
-        "x3": [2, 3, 4, 5, 6, 7, 2, 3, 4, 5, 6, 7],
-        "x34": [2, 3, 4, 5, 6, 7, 4, 5, 6, 7, 8, 9],
-        "x35": [2, 3, 4, 5, 6, 7, 4, 5, 6, 7, 8, 9],
-        "y": [1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2]
-    })
-    train, test = train_test_split(dat, test_size=.2, random_state=123)
+    train, test = train_test_split(toy_dataset, test_size=.2, random_state=123)
     train_x, train_y = train.drop(columns="y"), train["y"]
     train_y = [1,2,3,4,5,6,7,8,9]
     with pytest.raises(TypeError) as e_info:
