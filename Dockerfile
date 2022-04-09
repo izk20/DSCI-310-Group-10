@@ -5,7 +5,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends build-essential
 
 COPY requirements.txt requirements.txt
 
-RUN pip install group10pack=0.1.5
+RUN pip install group10pack==0.1.5
 
 RUN pip3 install -r requirements.txt
 
