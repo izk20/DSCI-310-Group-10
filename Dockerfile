@@ -7,17 +7,11 @@ RUN R -e "install.packages('reticulate')"
 
 RUN python3.9 -m pip install group10pack
 
-#RUN R -e "library(reticulate)" \
-#         "use_python('/usr/bin/python3.9')"
-
-
 RUN R -e "install.packages('knitr', dependencies = TRUE)"
 
 RUN R -e "install.packages('bookdown')"
 
 RUN R -e "install.packages('rmarkdown')"
-
-# RUN pip install group10pack
 
 COPY requirements.txt requirements.txt
 
