@@ -34,7 +34,7 @@ Steps:
 * Using the command line/terminal, navigate to the repository directory
 * Type the following:
 * Navigate to the root directory of the project
-    - **```docker run -d -p 8787:8787 -v /$(pwd):/home/rstudio -e PASSWORD=pass mahdiheydar/dsci-310-10-image:v3.4.0```**
+    - **```docker run -d -p 8787:8787 -v /$(pwd):/home/rstudio -e PASSWORD=pass mahdiheydar/dsci-310-10-image:v3.58.0```**
 * Once this is finished running, open a browser and type localhost:8787
 * Use the following information to enter the container
        **Username: rstudio**
@@ -56,7 +56,7 @@ Steps:
   - scikit-learn=0.24.2 
   - seaborn==0.11.2
   - matplotlib==3.5.1
-  - group10pack==0.1.6
+  - group10pack==0.1.9
 
 ### License
 This project is licensed under the MIT License and [Creative Commons Attribution-NonCommerical-NoDerivatives 4.0 International License](https://creativecommons.org/licenses/by-nc-nd/4.0/)
