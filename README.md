@@ -30,7 +30,7 @@ Steps:
 * Install Docker if you have not already done so. This is hardware specific and is specified here: https://docs.docker.com/get-docker/
 * Clone this repository to your local machine:
 
-    -**```git clone https://github.com/DSCI-310/DSCI-310-Group-10.git```**
+    -**```git clone git@github.com:DSCI-310/DSCI-310-Group-10.git```**
 * Using the command line/terminal, navigate to the repository directory
 * Type the following:
 * Navigate to the root directory of the project
