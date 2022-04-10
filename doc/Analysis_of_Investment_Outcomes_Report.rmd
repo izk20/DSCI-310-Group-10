@@ -44,11 +44,11 @@ import matplotlib.pyplot as plt
 from sklearn.neighbors import KNeighborsClassifier
 import sys
 sys.path.append('..')
-from src.analysis.format_histograms import format_histograms
-from src.analysis.alpha_tuning import ridge_alpha_tuning
-from src.analysis.KNN_tuning import KNN_tuning
-from src.analysis import inv_outcome_plot
-from src.analysis.split_drop import split_drop
+from group10pack.format_histograms import format_histograms
+from group10pack.alpha_tuning import ridge_alpha_tuning
+from group10pack.KNN_tuning import KNN_tuning
+from group10pack.inv_outcome_plot import inv_outcome_plot
+from group10pack.split_drop import split_drop
 import pickle
 ```
 
